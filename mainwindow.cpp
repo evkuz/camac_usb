@@ -976,6 +976,23 @@ void MainWindow::on_Stop_ALL_pushButton_clicked()
 
     // Закрыть файл с данными.
     KAN->mfile.close();
+
+    // И вот теперь добавляем открытие нового файла для записи, если остаёмся для работы в ручном режиме.
+/*
+    str = fname.right(7);
+    str = str.left(3);
+   int     index = str.toInt();  // Получили индекс файла
+           index++; //Увеличили индекс для следующего файла
+   QString newindex = QString::number(index);
+    if (index <10) newindex.prepend("00");
+    if (index > 9 && index < 100 ) newindex.prepend("0");
+    fname.replace(20,3,newindex); //qDebug() << fname;
+
+
+  //  QString str_2; str_2 = str.append("xxx");
+ //   mfile.setFileName(fname);
+  File_Open(fname);
+*/
 }
 //++++++++++++++++++++++++++++++++
 // Это слот сигнала KAN->Show_data(str);
@@ -1302,7 +1319,7 @@ void MainWindow::on_Start_Aquisition_pushButton_clicked()
     // Добавляем команду N[0]*A[0]*F[27]
   // Camac_SPEC_Command(CAMAC_F27, 0x0000);
 
-    Camac_Run_Always();
+    //Camac_Run_Always();  // Для тестов
 
     //Обновляем буффер в класее FTDI
    emit push_data_buffer(byOutputBuffer); // Копируем данные массива byOutputBuffer в массив внутри класса FTDI_D2XX
