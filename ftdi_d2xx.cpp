@@ -350,7 +350,8 @@ mutex.unlock();
       //Останавливаем поток, пишем файл на диск.
 
    //  emit Thread_Pause_Signal();
-       QString fname = mfile.fileName();
+       //QString
+       fname = mfile.fileName();
        mfile.close(); //if (!ftStatus) { str.sprintf("Неудалось СЛИТЬ данные\n"); emit Show_data(str);}
        KK_Write_To_Log(0xeeee, "File is written on disk \n");
        str = fname.right(7);
@@ -716,5 +717,25 @@ void FTDI_D2XX::KK_Write_To_Log (int value, QString log_nessage)
 
 }
 //==================================================
+void FTDI_D2XX::make_io_file_slot()
+{
+    QString str;
 
+    fname = mfile.fileName();
+        str = fname.right(7);
+        str = str.left(3);
+       int     index = str.toInt();  // Получили индекс файла
+               index++; //Увеличили индекс для следующего файла
+       QString newindex = QString::number(index);
+        if (index <10) newindex.prepend("00");
+        if (index > 9 && index < 100 ) newindex.prepend("0");
+        fname.replace(20,3,newindex); //qDebug() << fname;
+
+
+      //  QString str_2; str_2 = str.append("xxx");
+     //   mfile.setFileName(fname);
+      File_Open(fname);
+
+
+}
 //===================================================

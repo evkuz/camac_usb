@@ -218,6 +218,10 @@ MainWindow::MainWindow(QWidget *parent) :
           connect (KAN, SIGNAL(Thread_Pause_OFF_Signal()), chan_B, SLOT(Thread_Pause_OFF_Slot()) );
 
 
+          connect (this, SIGNAL(make_io_file_signal()), KAN, SLOT(make_io_file_slot()) );
+
+
+
 //ui->tab_camac->
 camac_tab = new camac_paint(ui->tab_camac);
 camac_tab->resize(30,30);
@@ -978,21 +982,9 @@ void MainWindow::on_Stop_ALL_pushButton_clicked()
     KAN->mfile.close();
 
     // И вот теперь добавляем открытие нового файла для записи, если остаёмся для работы в ручном режиме.
-/*
-    str = fname.right(7);
-    str = str.left(3);
-   int     index = str.toInt();  // Получили индекс файла
-           index++; //Увеличили индекс для следующего файла
-   QString newindex = QString::number(index);
-    if (index <10) newindex.prepend("00");
-    if (index > 9 && index < 100 ) newindex.prepend("0");
-    fname.replace(20,3,newindex); //qDebug() << fname;
 
+    emit make_io_file_signal();
 
-  //  QString str_2; str_2 = str.append("xxx");
- //   mfile.setFileName(fname);
-  File_Open(fname);
-*/
 }
 //++++++++++++++++++++++++++++++++
 // Это слот сигнала KAN->Show_data(str);
@@ -2141,6 +2133,8 @@ void MainWindow::on_N_Spectral_spinBox_Single_valueChanged(int arg1)
  //   str.sprintf("Передаваемый аргумент имеет значение : %d \n", arg1); Write_To_Log(0x7777, str);
 
     Hyst_Single->replot();
+
+    // Ага, а буфер остался со старыми точками ???!!!
 }
 
 void MainWindow::on_N_Spectral_Channel_spinBox_Single_valueChanged(int arg1)

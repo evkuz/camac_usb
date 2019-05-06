@@ -129,7 +129,7 @@ UCHAR Mask = 0xff;
 UCHAR Mode;
 UCHAR LatencyTimer = 8; //16ms default
 
-QString str;
+QString str, fname;
 
 int DevNumber; //Номер НАШЕГО девайса
 
@@ -204,6 +204,7 @@ public slots:
     void Write_TO_File_Slot();    // По нажатию кнопки в GUI записать в файл заранее заданные данные. В тестовых целях.
     void Get_Spectral_Points_Slot(); // Делаем выборку данных из файла для обновления спектра.
 
+    void make_io_file_slot(); // Слот обработки сигнала void make_io_file_signal();
 
 };
 
