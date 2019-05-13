@@ -114,6 +114,7 @@ public:
     QPushButton *Start_Aquisition_pushButton;
     QLabel *label_39;
     QPushButton *Load_commands_pushButton;
+    QLabel *label_23;
     QWidget *tab_Single_NOT_ADP16;
     QWidget *SINGLE_widget;
     QLabel *label_21;
@@ -143,12 +144,15 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(1175, 593);
+        MainWindow->resize(1134, 593);
         QFont font;
         font.setPointSize(13);
         font.setBold(false);
         font.setWeight(50);
         MainWindow->setFont(font);
+        QIcon icon;
+        icon.addFile(QStringLiteral("../0_icons/usb.png"), QSize(), QIcon::Normal, QIcon::Off);
+        MainWindow->setWindowIcon(icon);
         MainWindow->setStyleSheet(QStringLiteral(""));
         MainWindow->setAnimated(false);
         centralWidget = new QWidget(MainWindow);
@@ -161,9 +165,12 @@ public:
         font1.setPointSize(13);
         tabWidget->setFont(font1);
         tabWidget->setAutoFillBackground(true);
-        tabWidget->setStyleSheet(QStringLiteral(""));
+        tabWidget->setStyleSheet(QStringLiteral("background-color: rgb(188, 199, 170);"));
+        tabWidget->setDocumentMode(true);
         tab_camac = new QWidget();
         tab_camac->setObjectName(QStringLiteral("tab_camac"));
+        tab_camac->setAutoFillBackground(true);
+        tab_camac->setStyleSheet(QStringLiteral("background-color: rgb(188, 199, 170);"));
         A_spinBox = new QSpinBox(tab_camac);
         A_spinBox->setObjectName(QStringLiteral("A_spinBox"));
         A_spinBox->setGeometry(QRect(250, 60, 151, 51));
@@ -183,7 +190,7 @@ public:
         Clear_All->setFont(font1);
         groupBox = new QGroupBox(tab_camac);
         groupBox->setObjectName(QStringLiteral("groupBox"));
-        groupBox->setGeometry(QRect(350, 290, 311, 91));
+        groupBox->setGeometry(QRect(350, 280, 311, 101));
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(2);
         sizePolicy.setVerticalStretch(2);
@@ -209,6 +216,7 @@ public:
 "    left: 10px;\n"
 "    padding: 0 3px 0 3px;\n"
 "}"));
+        groupBox->setTitle(QStringLiteral(""));
         groupBox->setFlat(false);
         NAF_Data_Label = new QLabel(groupBox);
         NAF_Data_Label->setObjectName(QStringLiteral("NAF_Data_Label"));
@@ -216,6 +224,8 @@ public:
         QFont font4;
         font4.setPointSize(16);
         NAF_Data_Label->setFont(font4);
+        NAF_Data_Label->setAutoFillBackground(false);
+        NAF_Data_Label->setStyleSheet(QStringLiteral("background-color: rgb(255, 244, 79);"));
         label_4 = new QLabel(groupBox);
         label_4->setObjectName(QStringLiteral("label_4"));
         label_4->setGeometry(QRect(10, 50, 261, 20));
@@ -224,6 +234,7 @@ public:
         font5.setBold(false);
         font5.setWeight(50);
         label_4->setFont(font5);
+        label_4->setStyleSheet(QStringLiteral("background-color: rgb(255, 244, 79);"));
         Sel_Bit_04 = new QPushButton(tab_camac);
         Sel_Bit_04->setObjectName(QStringLiteral("Sel_Bit_04"));
         Sel_Bit_04->setGeometry(QRect(740, 200, 51, 31));
@@ -395,7 +406,10 @@ public:
         pushButton_stop_Sending->setGeometry(QRect(20, 70, 141, 51));
         label_41 = new QLabel(Frequency_frame);
         label_41->setObjectName(QStringLiteral("label_41"));
-        label_41->setGeometry(QRect(220, 70, 201, 21));
+        label_41->setGeometry(QRect(250, 70, 151, 21));
+        QFont font9;
+        font9.setPointSize(10);
+        label_41->setFont(font9);
         Sel_Bit_14 = new QPushButton(tab_camac);
         Sel_Bit_14->setObjectName(QStringLiteral("Sel_Bit_14"));
         Sel_Bit_14->setGeometry(QRect(140, 200, 51, 31));
@@ -414,6 +428,8 @@ public:
         N_spinBox->setObjectName(QStringLiteral("N_spinBox"));
         N_spinBox->setGeometry(QRect(50, 60, 151, 51));
         N_spinBox->setFont(font2);
+        N_spinBox->setAutoFillBackground(true);
+        N_spinBox->setStyleSheet(QStringLiteral("background-color: rgb(188, 199, 170);"));
         N_spinBox->setButtonSymbols(QAbstractSpinBox::PlusMinus);
         N_spinBox->setMinimum(0);
         N_spinBox->setMaximum(23);
@@ -612,7 +628,11 @@ public:
         Load_commands_pushButton->setObjectName(QStringLiteral("Load_commands_pushButton"));
         Load_commands_pushButton->setGeometry(QRect(680, 450, 341, 41));
         Load_commands_pushButton->setFont(font1);
-        tabWidget->addTab(tab_camac, QString());
+        label_23 = new QLabel(tab_camac);
+        label_23->setObjectName(QStringLiteral("label_23"));
+        label_23->setGeometry(QRect(430, 390, 161, 20));
+        label_23->setFont(font6);
+        tabWidget->addTab(tab_camac, icon, QString());
         Frequency_frame->raise();
         A_spinBox->raise();
         X_label->raise();
@@ -687,25 +707,26 @@ public:
         Start_Aquisition_pushButton->raise();
         label_39->raise();
         Load_commands_pushButton->raise();
+        label_23->raise();
         tab_Single_NOT_ADP16 = new QWidget();
         tab_Single_NOT_ADP16->setObjectName(QStringLiteral("tab_Single_NOT_ADP16"));
-        tab_Single_NOT_ADP16->setAutoFillBackground(true);
+        tab_Single_NOT_ADP16->setAutoFillBackground(false);
         tab_Single_NOT_ADP16->setStyleSheet(QStringLiteral(""));
         SINGLE_widget = new QWidget(tab_Single_NOT_ADP16);
         SINGLE_widget->setObjectName(QStringLiteral("SINGLE_widget"));
         SINGLE_widget->setGeometry(QRect(10, 60, 800, 400));
-        SINGLE_widget->setAutoFillBackground(true);
+        SINGLE_widget->setAutoFillBackground(false);
         SINGLE_widget->setStyleSheet(QStringLiteral("color: rgb(255, 255, 0);"));
         label_21 = new QLabel(tab_Single_NOT_ADP16);
         label_21->setObjectName(QStringLiteral("label_21"));
         label_21->setGeometry(QRect(1000, 50, 61, 31));
-        QFont font9;
-        font9.setPointSize(18);
-        label_21->setFont(font9);
+        QFont font10;
+        font10.setPointSize(18);
+        label_21->setFont(font10);
         N_Spectral_spinBox_Single = new QSpinBox(tab_Single_NOT_ADP16);
         N_Spectral_spinBox_Single->setObjectName(QStringLiteral("N_Spectral_spinBox_Single"));
         N_Spectral_spinBox_Single->setGeometry(QRect(830, 90, 121, 51));
-        N_Spectral_spinBox_Single->setFont(font9);
+        N_Spectral_spinBox_Single->setFont(font10);
         N_Spectral_spinBox_Single->setMinimum(1);
         N_Spectral_spinBox_Single->setMaximum(23);
         N_Spectral_spinBox_Single->setValue(17);
@@ -719,11 +740,11 @@ public:
         label_22 = new QLabel(tab_Single_NOT_ADP16);
         label_22->setObjectName(QStringLiteral("label_22"));
         label_22->setGeometry(QRect(870, 50, 21, 31));
-        label_22->setFont(font9);
+        label_22->setFont(font10);
         N_Spectral_Channel_spinBox_Single = new QSpinBox(tab_Single_NOT_ADP16);
         N_Spectral_Channel_spinBox_Single->setObjectName(QStringLiteral("N_Spectral_Channel_spinBox_Single"));
         N_Spectral_Channel_spinBox_Single->setGeometry(QRect(980, 90, 121, 51));
-        N_Spectral_Channel_spinBox_Single->setFont(font9);
+        N_Spectral_Channel_spinBox_Single->setFont(font10);
         N_Spectral_Channel_spinBox_Single->setMinimum(1);
         N_Spectral_Channel_spinBox_Single->setMaximum(16);
         tabWidget->addTab(tab_Single_NOT_ADP16, QString());
@@ -745,22 +766,22 @@ public:
         N_Spectral_ADP16_spinBox = new QSpinBox(tab_ADP16_Alpha_Spectral);
         N_Spectral_ADP16_spinBox->setObjectName(QStringLiteral("N_Spectral_ADP16_spinBox"));
         N_Spectral_ADP16_spinBox->setGeometry(QRect(830, 90, 121, 51));
-        N_Spectral_ADP16_spinBox->setFont(font9);
+        N_Spectral_ADP16_spinBox->setFont(font10);
         N_Spectral_ADP16_spinBox->setMinimum(1);
         N_Spectral_ADP16_spinBox->setMaximum(23);
         N_Spectral_ADP16_spinBox->setValue(14);
         label_19 = new QLabel(tab_ADP16_Alpha_Spectral);
         label_19->setObjectName(QStringLiteral("label_19"));
         label_19->setGeometry(QRect(870, 50, 21, 31));
-        label_19->setFont(font9);
+        label_19->setFont(font10);
         label_20 = new QLabel(tab_ADP16_Alpha_Spectral);
         label_20->setObjectName(QStringLiteral("label_20"));
         label_20->setGeometry(QRect(1000, 50, 61, 31));
-        label_20->setFont(font9);
+        label_20->setFont(font10);
         N_Spectral_Channel_ADP16_spinBox = new QSpinBox(tab_ADP16_Alpha_Spectral);
         N_Spectral_Channel_ADP16_spinBox->setObjectName(QStringLiteral("N_Spectral_Channel_ADP16_spinBox"));
         N_Spectral_Channel_ADP16_spinBox->setGeometry(QRect(980, 90, 121, 51));
-        N_Spectral_Channel_ADP16_spinBox->setFont(font9);
+        N_Spectral_Channel_ADP16_spinBox->setFont(font10);
         N_Spectral_Channel_ADP16_spinBox->setMinimum(1);
         N_Spectral_Channel_ADP16_spinBox->setMaximum(16);
         Show_Selected_Spectral_pushButton = new QPushButton(tab_ADP16_Alpha_Spectral);
@@ -789,7 +810,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1175, 21));
+        menuBar->setGeometry(QRect(0, 0, 1134, 21));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -809,10 +830,9 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "KK_Control", 0));
         X_label->setText(QApplication::translate("MainWindow", "X", 0));
         Clear_All->setText(QApplication::translate("MainWindow", "\320\241\320\221\320\240\320\236\320\241\320\230\320\242\320\254", 0));
-        groupBox->setTitle(QApplication::translate("MainWindow", "\320\232\320\276\320\264 \320\272\320\276\320\274\320\260\320\275\320\264\321\213 \320\232\320\220\320\234\320\220\320\232", 0));
         NAF_Data_Label->setText(QApplication::translate("MainWindow", "00       00       00         00", 0));
         label_4->setText(QApplication::translate("MainWindow", " 7..0        15 - 8     23 - 16       31- 24", 0));
         Sel_Bit_04->setText(QApplication::translate("MainWindow", "04", 0));
@@ -862,6 +882,7 @@ public:
         Start_Aquisition_pushButton->setText(QApplication::translate("MainWindow", "\320\227\320\260\320\277\321\203\321\201\321\202\320\270\321\202\321\214 \320\235\320\260\320\261\320\276\321\200", 0));
         label_39->setText(QApplication::translate("MainWindow", "01", 0));
         Load_commands_pushButton->setText(QApplication::translate("MainWindow", "\320\227\320\260\320\263\321\200\321\203\320\267\320\270\321\202\321\214 \320\272\320\276\320\274\320\260\320\275\320\264\321\213 \320\270\320\267 \321\204\320\260\320\271\320\273\320\260", 0));
+        label_23->setText(QApplication::translate("MainWindow", "\320\232\320\276\320\264 \320\272\320\276\320\274\320\260\320\275\320\264\321\213 \320\232\320\220\320\234\320\220\320\232", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_camac), QApplication::translate("MainWindow", "KK manual", 0));
         label_21->setText(QApplication::translate("MainWindow", "Chan.", 0));
         Show_Selected_Spectral_Single_pushButton->setText(QApplication::translate("MainWindow", "\320\237\320\236\320\232\320\220\320\227\320\220\320\242\320\254 Real Time", 0));

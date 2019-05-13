@@ -62,7 +62,7 @@ MainWindow::MainWindow(QWidget *parent) :
 //+++++++++++++++++++++++++++++++++++++ Объект класса FTDI устройства ++++++++++++++
 
     KAN = new FTDI_D2XX();
-
+// Нужна обработка исключения
 
 //     KAN->Mini_ID_A = "Camac_021216A"; //FT112244EKA
 //     KAN->Mini_ID_B = "Camac_021216B"; //FT112244EKB

@@ -20,8 +20,8 @@ FTDI_D2XX::FTDI_D2XX()
 
 
 //memset(byInputBuffer, 0, USB_Buffer_Size); //sizeof(byInputBuffer)
-
-memset(byInputBuffer, 0xEE, accum_buffer_SIZE); //sizeof(byInputBuffer)
+  // Инициализируем буфер данными
+  memset(byInputBuffer, 0xEE, accum_buffer_SIZE); //sizeof(byInputBuffer)
   file_pos = 0;
   CURRENT_BUFFER_INDEX_1 = TRUE;
   BUF_PTR = &BUF_01; //new QByteArray;//
@@ -453,6 +453,7 @@ int FTDI_D2XX::Read_A_Single ( char *buf_data, int buf_size )
     return ftdi_error_code; // 0 means it's OK !
 }
 //===================================================
+//Открываем файл для записи ДВОИЧНЫХ ДАННЫХ
 int FTDI_D2XX::File_Open(QString fname)
 {
     int ftdi_error_code = 0;
@@ -466,6 +467,7 @@ int FTDI_D2XX::File_Open(QString fname)
 return ftdi_error_code; // 0 means it's OK !
 }
 //==================================================
+// Открываем лог-файл, текстовый режим
 int FTDI_D2XX::Log_File_Open(QString lname)
 {
     int ftdi_error_code = 0;
@@ -701,7 +703,7 @@ emit Draw_Spectral_N_Chan_Signal(&increment_qbuf); //&increment_qbuf  &t_points
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //+++++++++++++++++++++++++++++++++
-void FTDI_D2XX::KK_Write_To_Log (int value, QString log_nessage)
+void FTDI_D2XX::KK_Write_To_Log (int value, QString log_message)
 {
     QDateTime curdate ;
     QTextStream uin(&this->LogFile);
@@ -712,7 +714,7 @@ void FTDI_D2XX::KK_Write_To_Log (int value, QString log_nessage)
     str = curdate.toString("yyyy-MM-dd__hh:mm:ss:z").toLocal8Bit(); str.append(" > ");
     str2 = QString("0x%1: ").arg(value, 4, 16, QChar('0'));
 
-    uin << str << str2 << log_nessage;
+    uin << str << str2 << log_message;
 
 
 }
