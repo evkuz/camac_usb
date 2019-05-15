@@ -246,7 +246,7 @@ private slots:
 
     //+++++++++++++ camac concerned
     void Camac_N_Connected_Slot(int N_num); // Слот обработки Сигнала, что станция N на связи.
-    void Camac_N_NOT_Connected_Slot(uint N_num); // Слот обработки Сигнала, что станция N !!! НЕ !!! на связи.
+    void Camac_N_NOT_Connected_Slot(int N_num); // Слот обработки Сигнала, что станция N !!! НЕ !!! на связи.
 
     void Camac_N_Q_Flag_Slot();
     void Camac_N_Q_NOT_Flag_Slot();

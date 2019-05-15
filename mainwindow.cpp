@@ -1269,7 +1269,7 @@ void MainWindow::Camac_N_Connected_Slot(int N_num) // Слот обработк�
 }
 //+++++++++++++++++++
 
-void MainWindow::Camac_N_NOT_Connected_Slot(uint N_num)
+void MainWindow::Camac_N_NOT_Connected_Slot(int N_num)
 {
 //    X = FALSE;
 //    update();

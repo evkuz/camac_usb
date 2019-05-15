@@ -164,13 +164,13 @@ public:
         QFont font1;
         font1.setPointSize(13);
         tabWidget->setFont(font1);
-        tabWidget->setAutoFillBackground(true);
-        tabWidget->setStyleSheet(QStringLiteral("background-color: rgb(188, 199, 170);"));
+        tabWidget->setAutoFillBackground(false);
+        tabWidget->setStyleSheet(QStringLiteral(""));
         tabWidget->setDocumentMode(true);
         tab_camac = new QWidget();
         tab_camac->setObjectName(QStringLiteral("tab_camac"));
-        tab_camac->setAutoFillBackground(true);
-        tab_camac->setStyleSheet(QStringLiteral("background-color: rgb(188, 199, 170);"));
+        tab_camac->setAutoFillBackground(false);
+        tab_camac->setStyleSheet(QStringLiteral(""));
         A_spinBox = new QSpinBox(tab_camac);
         A_spinBox->setObjectName(QStringLiteral("A_spinBox"));
         A_spinBox->setGeometry(QRect(250, 60, 151, 51));
