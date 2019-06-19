@@ -257,8 +257,8 @@ private slots:
 
     void on_Show_Spectral_Selected_From_File_pushButton_clicked();
 
-    void Show_file_size_slot(QString sss, QString sss2);
-    void Show_file_offset_slot (QString sss);
+  //  void Show_file_size_slot(QString sss, QString sss2);
+  //  void Show_file_offset_slot (QString sss);
 
     void on_Load_commands_pushButton_clicked();
 
@@ -268,7 +268,11 @@ private slots:
 
     void on_N_Spectral_spinBox_Single_valueChanged(int arg1);
 
-    void on_N_Spectral_Channel_spinBox_Single_valueChanged(int arg1);
+//    void on_N_Spectral_Channel_spinBox_Single_valueChanged(int arg1);
+
+//    void on_N_Spectral_Channel_spinBox_Single_editingFinished();
+
+//    void on_N_Spectral_Channel_spinBox_Single_valueChanged(const QString &arg1);
 
 private:
     Ui::MainWindow *ui;

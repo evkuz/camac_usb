@@ -738,6 +738,10 @@ void FTDI_D2XX::make_io_file_slot()
      //   mfile.setFileName(fname);
       File_Open(fname);
 
+      // Делаем запись в лог об открытии файла
+       str.sprintf("Открыт файл набора данных ");
+       str.append(fname); str.append("\n");
+       KK_Write_To_Log (0x4444, str);
 
 }
 //===================================================

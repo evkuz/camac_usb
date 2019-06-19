@@ -24,9 +24,9 @@
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
-#include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
+#include "mainwindow.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -123,19 +123,8 @@ public:
     QPushButton *Show_Spectral_Selected_From_File_Single_pushButton;
     QLabel *label_22;
     QSpinBox *N_Spectral_Channel_spinBox_Single;
-    QWidget *tab_ADP16_Alpha_Spectral;
-    QWidget *ALPHA_widget;
-    QSpinBox *N_Spectral_ADP16_spinBox;
-    QLabel *label_19;
-    QLabel *label_20;
-    QSpinBox *N_Spectral_Channel_ADP16_spinBox;
-    QPushButton *Show_Selected_Spectral_pushButton;
-    QTextBrowser *Tab_2_Spectral_Data_textBrowser;
-    QPushButton *Show_Spectral_Selected_From_File_pushButton;
-    QLabel *File_Size_label;
-    QLabel *Current_Offset_label;
+    MainWindow *tab_ADP16_Alpha_Spectral;
     QWidget *tab_FISSION;
-    QWidget *FISSION_widget;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -755,58 +744,8 @@ public:
         label_22->raise();
         N_Spectral_Channel_spinBox_Single->raise();
         SINGLE_widget->raise();
-        tab_ADP16_Alpha_Spectral = new QWidget();
-        tab_ADP16_Alpha_Spectral->setObjectName(QStringLiteral("tab_ADP16_Alpha_Spectral"));
-        tab_ADP16_Alpha_Spectral->setStyleSheet(QStringLiteral(""));
-        ALPHA_widget = new QWidget(tab_ADP16_Alpha_Spectral);
-        ALPHA_widget->setObjectName(QStringLiteral("ALPHA_widget"));
-        ALPHA_widget->setEnabled(true);
-        ALPHA_widget->setGeometry(QRect(10, 60, 800, 400));
-        ALPHA_widget->setAutoFillBackground(false);
-        N_Spectral_ADP16_spinBox = new QSpinBox(tab_ADP16_Alpha_Spectral);
-        N_Spectral_ADP16_spinBox->setObjectName(QStringLiteral("N_Spectral_ADP16_spinBox"));
-        N_Spectral_ADP16_spinBox->setGeometry(QRect(830, 90, 121, 51));
-        N_Spectral_ADP16_spinBox->setFont(font10);
-        N_Spectral_ADP16_spinBox->setMinimum(1);
-        N_Spectral_ADP16_spinBox->setMaximum(23);
-        N_Spectral_ADP16_spinBox->setValue(14);
-        label_19 = new QLabel(tab_ADP16_Alpha_Spectral);
-        label_19->setObjectName(QStringLiteral("label_19"));
-        label_19->setGeometry(QRect(870, 50, 21, 31));
-        label_19->setFont(font10);
-        label_20 = new QLabel(tab_ADP16_Alpha_Spectral);
-        label_20->setObjectName(QStringLiteral("label_20"));
-        label_20->setGeometry(QRect(1000, 50, 61, 31));
-        label_20->setFont(font10);
-        N_Spectral_Channel_ADP16_spinBox = new QSpinBox(tab_ADP16_Alpha_Spectral);
-        N_Spectral_Channel_ADP16_spinBox->setObjectName(QStringLiteral("N_Spectral_Channel_ADP16_spinBox"));
-        N_Spectral_Channel_ADP16_spinBox->setGeometry(QRect(980, 90, 121, 51));
-        N_Spectral_Channel_ADP16_spinBox->setFont(font10);
-        N_Spectral_Channel_ADP16_spinBox->setMinimum(1);
-        N_Spectral_Channel_ADP16_spinBox->setMaximum(16);
-        Show_Selected_Spectral_pushButton = new QPushButton(tab_ADP16_Alpha_Spectral);
-        Show_Selected_Spectral_pushButton->setObjectName(QStringLiteral("Show_Selected_Spectral_pushButton"));
-        Show_Selected_Spectral_pushButton->setGeometry(QRect(830, 190, 271, 51));
-        Tab_2_Spectral_Data_textBrowser = new QTextBrowser(tab_ADP16_Alpha_Spectral);
-        Tab_2_Spectral_Data_textBrowser->setObjectName(QStringLiteral("Tab_2_Spectral_Data_textBrowser"));
-        Tab_2_Spectral_Data_textBrowser->setGeometry(QRect(820, 401, 281, 71));
-        Show_Spectral_Selected_From_File_pushButton = new QPushButton(tab_ADP16_Alpha_Spectral);
-        Show_Spectral_Selected_From_File_pushButton->setObjectName(QStringLiteral("Show_Spectral_Selected_From_File_pushButton"));
-        Show_Spectral_Selected_From_File_pushButton->setGeometry(QRect(830, 280, 271, 51));
-        File_Size_label = new QLabel(tab_ADP16_Alpha_Spectral);
-        File_Size_label->setObjectName(QStringLiteral("File_Size_label"));
-        File_Size_label->setGeometry(QRect(830, 350, 111, 31));
-        Current_Offset_label = new QLabel(tab_ADP16_Alpha_Spectral);
-        Current_Offset_label->setObjectName(QStringLiteral("Current_Offset_label"));
-        Current_Offset_label->setGeometry(QRect(960, 350, 131, 31));
-        tabWidget->addTab(tab_ADP16_Alpha_Spectral, QString());
-        tab_FISSION = new QWidget();
-        tab_FISSION->setObjectName(QStringLiteral("tab_FISSION"));
-        FISSION_widget = new QWidget(tab_FISSION);
-        FISSION_widget->setObjectName(QStringLiteral("FISSION_widget"));
-        FISSION_widget->setGeometry(QRect(10, 60, 800, 400));
-        FISSION_widget->setAutoFillBackground(false);
-        tabWidget->addTab(tab_FISSION, QString());
+
+
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -821,7 +760,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(2);
         Frequency_comboBox->setCurrentIndex(-1);
 
 
@@ -889,12 +828,6 @@ public:
         Show_Spectral_Selected_From_File_Single_pushButton->setText(QApplication::translate("MainWindow", "\320\237\320\276\320\272\320\260\320\267\320\260\321\202\321\214 \320\270\320\267 \321\204\320\260\320\271\320\273\320\260", 0));
         label_22->setText(QApplication::translate("MainWindow", "N", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_Single_NOT_ADP16), QApplication::translate("MainWindow", "Single", 0));
-        label_19->setText(QApplication::translate("MainWindow", "N", 0));
-        label_20->setText(QApplication::translate("MainWindow", "Chan.", 0));
-        Show_Selected_Spectral_pushButton->setText(QApplication::translate("MainWindow", "\320\237\320\236\320\232\320\220\320\227\320\220\320\242\320\254 Real Time", 0));
-        Show_Spectral_Selected_From_File_pushButton->setText(QApplication::translate("MainWindow", "\320\237\320\276\320\272\320\260\320\267\320\260\321\202\321\214 \320\270\320\267 \321\204\320\260\320\271\320\273\320\260", 0));
-        File_Size_label->setText(QApplication::translate("MainWindow", "0", 0));
-        Current_Offset_label->setText(QApplication::translate("MainWindow", "0", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_ADP16_Alpha_Spectral), QApplication::translate("MainWindow", "ADP16 Alpha", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_FISSION), QApplication::translate("MainWindow", "ADP16 Fission", 0));
         tabWidget->setTabWhatsThis(tabWidget->indexOf(tab_FISSION), QApplication::translate("MainWindow", "LayOut of fission soectral", 0));

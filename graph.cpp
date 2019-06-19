@@ -42,7 +42,7 @@ void Plot::Draw_Spectral_N_Chan_Slot (QByteArray * ibuf) //QByteArray &ibuf
     QByteArray ba;
     const char *mbuf;
     UINT16 fdata, fdata_2;
-    UINT16 fdata_alpha, fdata_alpha_2;//, fdata_fission;
+ //   UINT16 fdata_alpha, fdata_alpha_2;//, fdata_fission;
     QString mydata;
 
     UINT8 msb, lsb;
@@ -57,6 +57,8 @@ void Plot::Draw_Spectral_N_Chan_Slot (QByteArray * ibuf) //QByteArray &ibuf
 
   // Откуда тут знание о "command_type" ?
   // А из слота
+     mbuf_7 == '\xf0'; // Инициализируем
+
     switch (command_type) //См "Формат данных4.docx"
     {
       case 1 :

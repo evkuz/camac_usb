@@ -92,8 +92,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
-    connect (KAN, SIGNAL(Show_file_size_signal(QString,QString )), this, SLOT(Show_file_size_slot(QString,QString )) );
-    connect (KAN, SIGNAL(Show_file_offset_signal(QString)), this, SLOT(Show_file_offset_slot(QString)) );
+//    connect (KAN, SIGNAL(Show_file_size_signal(QString,QString )), this, SLOT(Show_file_size_slot(QString,QString )) );
+//    connect (KAN, SIGNAL(Show_file_offset_signal(QString)), this, SLOT(Show_file_offset_slot(QString)) );
 //    connect (KAN, SIGNAL(Draw_Spectral_N_Chan_Signal(QByteArray *)), this, SLOT(Draw_Spectral_N_Chan_Slot(QByteArray *)) ); //QByteArray
                                                             //,UINT8,UINT8                                      //,UINT8,UINT8
 //KAN->ftdi_init();
@@ -159,7 +159,7 @@ MainWindow::MainWindow(QWidget *parent) :
            Hyst_Single->Ch_Data_2 = 0.0;//0x0000;
 
            // Следующая вкладка - Альфа-спектр  ADP16
-
+/*
            ADP16_Alpha = new Plot (ui->ALPHA_widget, "ADP16 Alpha", 0.0, Fission_X_Limit, 0.0, 4096, FALSE);
            ADP16_Alpha->resize(800, 400);
 
@@ -177,7 +177,7 @@ MainWindow::MainWindow(QWidget *parent) :
            ADP16_Fission->intervals  = new QVector<QwtIntervalSample>;
            ADP16_Fission->Ch_Data = 0.0;//0x0000;
            ADP16_Fission->Ch_Data_2 = 0.0;//0x0000;
-
+*/
 
 
     connect (Hyst_Single, SIGNAL(Show_data_signal(QString)), this, SLOT(Output_text_to_window(QString)));
@@ -1343,10 +1343,10 @@ void MainWindow::on_Show_Selected_Spectral_pushButton_clicked()
 // Т.к. не работает fpga то сгенерим файл здесь. Т.е. запустим таймер, который будет записывать в файл.
 // А другой таймер будет считывать из файла.
  N_SPECTRAL = ui->N_Spectral_spinBox_Single->value();
- N_SPECTRAL_CHANNEL = ui->N_Spectral_Channel_spinBox_Single->value();
+// N_SPECTRAL_CHANNEL = ui->N_Spectral_Channel_spinBox_Single->value();
 
- N_SPECTRAL_ADP16 = ui->N_Spectral_ADP16_spinBox->value();
- N_SPECTRAL_ADP16_CHANNEL = ui->N_Spectral_Channel_ADP16_spinBox->value();
+// N_SPECTRAL_ADP16 = ui->N_Spectral_ADP16_spinBox->value();
+// N_SPECTRAL_ADP16_CHANNEL = ui->N_Spectral_Channel_ADP16_spinBox->value();
 
 
  //KAN->sfile.setFile(KAN->mfile);
@@ -1382,7 +1382,7 @@ void MainWindow::on_Show_Spectral_Selected_From_File_pushButton_clicked()
     mfile.setFileName(mStr);
 
     N_SPECTRAL = ui->N_Spectral_spinBox_Single->value();
-    N_SPECTRAL_CHANNEL = ui->N_Spectral_Channel_spinBox_Single->value();
+//    N_SPECTRAL_CHANNEL = ui->N_Spectral_Channel_spinBox_Single->value();
 
  //str.sprintf("Вывод спектра для станции № %d, канал %d",N_SPECTRAL,  N_SPECTRAL_CHANNEL); ui->Tab_2_Spectral_Data_textBrowser->append(str);
 
@@ -1441,6 +1441,7 @@ else {
     }
 }
 //++++++++++++
+/*
 void MainWindow::Show_file_size_slot(QString sss, QString sss2)
 {
 
@@ -1452,6 +1453,7 @@ void MainWindow::Show_file_offset_slot(QString sss)
 {
     ui->Current_Offset_label->setText(sss);
 }
+*/
 //++++++++++++++++++++++++++++++++++++++++++++++++++
 /*
 void MainWindow::Draw_Spectral_N_Chan_Slot (QByteArray * ibuf) //QByteArray &ibuf
@@ -2047,7 +2049,7 @@ void MainWindow::on_Show_Selected_Spectral_Single_pushButton_clicked()
    // Т.к. не работает fpga то сгенерим файл здесь. Т.е. запустим таймер, который будет записывать в файл.
    // А другой таймер будет считывать из файла.
     N_SPECTRAL = ui->N_Spectral_spinBox_Single->value();
-    N_SPECTRAL_CHANNEL = ui->N_Spectral_Channel_spinBox_Single->value();
+//    N_SPECTRAL_CHANNEL = ui->N_Spectral_Channel_spinBox_Single->value();
 
     //Передаем значение N_SPECTRAL в класс Plot
 
@@ -2126,7 +2128,7 @@ void MainWindow::on_N_Spectral_spinBox_Single_valueChanged(int arg1)
     // Отсюда переходим на общую ф-цию смены окна отрисовки.
     // Передаем значения N "N_Spectral_Channel_spinBox_Single" - те, которые в данный момент установлены.
     N_SPECTRAL = arg1; //ui->N_Spectral_spinBox_Single->value();
-    N_SPECTRAL_CHANNEL = ui->N_Spectral_Channel_spinBox_Single->value();
+//    N_SPECTRAL_CHANNEL = ui->N_Spectral_Channel_spinBox_Single->value();
 
     str.sprintf("Изменился номер СТАНЦИИ для отрисовки спектра. Текущий номер : %d \n", N_SPECTRAL); Write_To_Log(0x7777, str);
 
@@ -2137,13 +2139,8 @@ void MainWindow::on_N_Spectral_spinBox_Single_valueChanged(int arg1)
     // Ага, а буфер остался со старыми точками ???!!!
 }
 
-void MainWindow::on_N_Spectral_Channel_spinBox_Single_valueChanged(int arg1)
-{
-    // Изменили номер канала в станции, для которой хотим "Показать Real Time"
-    // Отсюда переходим на общую ф-цию смены окна отрисовки.
-    // Передаем значения N "N_Spectral_Channel_spinBox_Single" - те, которые в данный момент установлены.
-//    N_SPECTRAL = arg1; //ui->N_Spectral_spinBox_Single->value();
-    N_SPECTRAL_CHANNEL = arg1; //ui->N_Spectral_Channel_spinBox_Single->value();
 
-    str.sprintf("Изменился номер КАНАЛА для отрисовки спектра. Текущий номер : %d \n", arg1); Write_To_Log(0x7777, str);
-}
+
+
+
+
