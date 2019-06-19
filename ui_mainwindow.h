@@ -15,7 +15,6 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QFrame>
-#include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
@@ -26,7 +25,6 @@
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
-#include "mainwindow.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -39,9 +37,6 @@ public:
     QSpinBox *A_spinBox;
     QLabel *X_label;
     QPushButton *Clear_All;
-    QGroupBox *groupBox;
-    QLabel *NAF_Data_Label;
-    QLabel *label_4;
     QPushButton *Sel_Bit_04;
     QPushButton *Sel_Bit_09;
     QLabel *X_label_2;
@@ -114,17 +109,12 @@ public:
     QPushButton *Start_Aquisition_pushButton;
     QLabel *label_39;
     QPushButton *Load_commands_pushButton;
-    QLabel *label_23;
     QWidget *tab_Single_NOT_ADP16;
     QWidget *SINGLE_widget;
-    QLabel *label_21;
     QSpinBox *N_Spectral_spinBox_Single;
     QPushButton *Show_Selected_Spectral_Single_pushButton;
     QPushButton *Show_Spectral_Selected_From_File_Single_pushButton;
     QLabel *label_22;
-    QSpinBox *N_Spectral_Channel_spinBox_Single;
-    MainWindow *tab_ADP16_Alpha_Spectral;
-    QWidget *tab_FISSION;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -177,66 +167,19 @@ public:
         Clear_All->setObjectName(QStringLiteral("Clear_All"));
         Clear_All->setGeometry(QRect(700, 250, 111, 41));
         Clear_All->setFont(font1);
-        groupBox = new QGroupBox(tab_camac);
-        groupBox->setObjectName(QStringLiteral("groupBox"));
-        groupBox->setGeometry(QRect(350, 280, 311, 101));
-        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-        sizePolicy.setHorizontalStretch(2);
-        sizePolicy.setVerticalStretch(2);
-        sizePolicy.setHeightForWidth(groupBox->sizePolicy().hasHeightForWidth());
-        groupBox->setSizePolicy(sizePolicy);
-        groupBox->setMaximumSize(QSize(311, 16777215));
-        QFont font3;
-        font3.setPointSize(12);
-        font3.setUnderline(false);
-        font3.setStrikeOut(false);
-        font3.setKerning(false);
-        groupBox->setFont(font3);
-        groupBox->setAutoFillBackground(false);
-        groupBox->setStyleSheet(QLatin1String("QGroupBox {\n"
-"	background-color: rgb(255, 244, 79);\n"
-"    border: 3px solid blue;\n"
-"    border-radius: 9px;\n"
-"    margin-top: 0.5em;\n"
-"}\n"
-"\n"
-"QGroupBox::title {\n"
-"    subcontrol-origin: margin;\n"
-"    left: 10px;\n"
-"    padding: 0 3px 0 3px;\n"
-"}"));
-        groupBox->setTitle(QStringLiteral(""));
-        groupBox->setFlat(false);
-        NAF_Data_Label = new QLabel(groupBox);
-        NAF_Data_Label->setObjectName(QStringLiteral("NAF_Data_Label"));
-        NAF_Data_Label->setGeometry(QRect(20, 30, 261, 21));
-        QFont font4;
-        font4.setPointSize(16);
-        NAF_Data_Label->setFont(font4);
-        NAF_Data_Label->setAutoFillBackground(false);
-        NAF_Data_Label->setStyleSheet(QStringLiteral("background-color: rgb(255, 244, 79);"));
-        label_4 = new QLabel(groupBox);
-        label_4->setObjectName(QStringLiteral("label_4"));
-        label_4->setGeometry(QRect(10, 50, 261, 20));
-        QFont font5;
-        font5.setPointSize(11);
-        font5.setBold(false);
-        font5.setWeight(50);
-        label_4->setFont(font5);
-        label_4->setStyleSheet(QStringLiteral("background-color: rgb(255, 244, 79);"));
         Sel_Bit_04 = new QPushButton(tab_camac);
         Sel_Bit_04->setObjectName(QStringLiteral("Sel_Bit_04"));
         Sel_Bit_04->setGeometry(QRect(740, 200, 51, 31));
-        QFont font6;
-        font6.setPointSize(12);
-        Sel_Bit_04->setFont(font6);
+        QFont font3;
+        font3.setPointSize(12);
+        Sel_Bit_04->setFont(font3);
         Sel_Bit_04->setAutoFillBackground(false);
         Sel_Bit_04->setStyleSheet(QStringLiteral(""));
         Sel_Bit_04->setCheckable(true);
         Sel_Bit_09 = new QPushButton(tab_camac);
         Sel_Bit_09->setObjectName(QStringLiteral("Sel_Bit_09"));
         Sel_Bit_09->setGeometry(QRect(440, 200, 51, 31));
-        Sel_Bit_09->setFont(font6);
+        Sel_Bit_09->setFont(font3);
         Sel_Bit_09->setAutoFillBackground(false);
         Sel_Bit_09->setStyleSheet(QStringLiteral(""));
         Sel_Bit_09->setCheckable(true);
@@ -247,7 +190,7 @@ public:
         Sel_Bit_07 = new QPushButton(tab_camac);
         Sel_Bit_07->setObjectName(QStringLiteral("Sel_Bit_07"));
         Sel_Bit_07->setGeometry(QRect(560, 200, 51, 31));
-        Sel_Bit_07->setFont(font6);
+        Sel_Bit_07->setFont(font3);
         Sel_Bit_07->setAutoFillBackground(false);
         Sel_Bit_07->setStyleSheet(QStringLiteral(""));
         Sel_Bit_07->setCheckable(true);
@@ -263,17 +206,17 @@ public:
         Sel_Bit_02 = new QPushButton(tab_camac);
         Sel_Bit_02->setObjectName(QStringLiteral("Sel_Bit_02"));
         Sel_Bit_02->setGeometry(QRect(860, 200, 51, 31));
-        Sel_Bit_02->setFont(font6);
+        Sel_Bit_02->setFont(font3);
         Sel_Bit_02->setAutoFillBackground(false);
         Sel_Bit_02->setStyleSheet(QStringLiteral(""));
         Sel_Bit_02->setCheckable(true);
         Sel_Bit_01 = new QPushButton(tab_camac);
         Sel_Bit_01->setObjectName(QStringLiteral("Sel_Bit_01"));
         Sel_Bit_01->setGeometry(QRect(920, 200, 51, 31));
-        QFont font7;
-        font7.setPointSize(12);
-        font7.setKerning(false);
-        Sel_Bit_01->setFont(font7);
+        QFont font4;
+        font4.setPointSize(12);
+        font4.setKerning(false);
+        Sel_Bit_01->setFont(font4);
         Sel_Bit_01->setAutoFillBackground(false);
         Sel_Bit_01->setStyleSheet(QStringLiteral(""));
         Sel_Bit_01->setCheckable(true);
@@ -282,104 +225,104 @@ public:
         label_3 = new QLabel(tab_camac);
         label_3->setObjectName(QStringLiteral("label_3"));
         label_3->setGeometry(QRect(520, 10, 21, 21));
-        QFont font8;
-        font8.setPointSize(14);
-        label_3->setFont(font8);
+        QFont font5;
+        font5.setPointSize(14);
+        label_3->setFont(font5);
         label_5 = new QLabel(tab_camac);
         label_5->setObjectName(QStringLiteral("label_5"));
         label_5->setGeometry(QRect(100, 40, 61, 21));
-        label_5->setFont(font8);
+        label_5->setFont(font5);
         label_5->setTextFormat(Qt::RichText);
         label_5->setWordWrap(true);
         Sel_Bit_06 = new QPushButton(tab_camac);
         Sel_Bit_06->setObjectName(QStringLiteral("Sel_Bit_06"));
         Sel_Bit_06->setGeometry(QRect(620, 200, 51, 31));
-        Sel_Bit_06->setFont(font6);
+        Sel_Bit_06->setFont(font3);
         Sel_Bit_06->setAutoFillBackground(false);
         Sel_Bit_06->setStyleSheet(QStringLiteral(""));
         Sel_Bit_06->setCheckable(true);
         Sel_Bit_11 = new QPushButton(tab_camac);
         Sel_Bit_11->setObjectName(QStringLiteral("Sel_Bit_11"));
         Sel_Bit_11->setGeometry(QRect(320, 200, 51, 31));
-        Sel_Bit_11->setFont(font6);
+        Sel_Bit_11->setFont(font3);
         Sel_Bit_11->setAutoFillBackground(false);
         Sel_Bit_11->setStyleSheet(QStringLiteral(""));
         Sel_Bit_11->setCheckable(true);
         SEND_TO_USB_pushButton = new QPushButton(tab_camac);
         SEND_TO_USB_pushButton->setObjectName(QStringLiteral("SEND_TO_USB_pushButton"));
         SEND_TO_USB_pushButton->setGeometry(QRect(670, 82, 171, 41));
-        SEND_TO_USB_pushButton->setFont(font6);
+        SEND_TO_USB_pushButton->setFont(font3);
         label_6 = new QLabel(tab_camac);
         label_6->setObjectName(QStringLiteral("label_6"));
         label_6->setGeometry(QRect(290, 40, 61, 21));
-        label_6->setFont(font8);
+        label_6->setFont(font5);
         label_6->setTextFormat(Qt::RichText);
         label_6->setWordWrap(true);
         Sel_Bit_12 = new QPushButton(tab_camac);
         Sel_Bit_12->setObjectName(QStringLiteral("Sel_Bit_12"));
         Sel_Bit_12->setGeometry(QRect(260, 200, 51, 31));
-        Sel_Bit_12->setFont(font6);
+        Sel_Bit_12->setFont(font3);
         Sel_Bit_12->setAutoFillBackground(false);
         Sel_Bit_12->setStyleSheet(QStringLiteral(""));
         Sel_Bit_12->setCheckable(true);
         label = new QLabel(tab_camac);
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(110, 10, 31, 31));
-        label->setFont(font8);
+        label->setFont(font5);
         label->setTextFormat(Qt::RichText);
         label->setWordWrap(true);
         Sel_Bit_08 = new QPushButton(tab_camac);
         Sel_Bit_08->setObjectName(QStringLiteral("Sel_Bit_08"));
         Sel_Bit_08->setGeometry(QRect(500, 200, 51, 31));
-        Sel_Bit_08->setFont(font6);
+        Sel_Bit_08->setFont(font3);
         Sel_Bit_08->setAutoFillBackground(false);
         Sel_Bit_08->setStyleSheet(QStringLiteral(""));
         Sel_Bit_08->setCheckable(true);
         Sel_Bit_15 = new QPushButton(tab_camac);
         Sel_Bit_15->setObjectName(QStringLiteral("Sel_Bit_15"));
         Sel_Bit_15->setGeometry(QRect(80, 200, 51, 31));
-        Sel_Bit_15->setFont(font6);
+        Sel_Bit_15->setFont(font3);
         Sel_Bit_15->setAutoFillBackground(false);
         Sel_Bit_15->setStyleSheet(QStringLiteral(""));
         Sel_Bit_15->setCheckable(true);
         Sel_Bit_03 = new QPushButton(tab_camac);
         Sel_Bit_03->setObjectName(QStringLiteral("Sel_Bit_03"));
         Sel_Bit_03->setGeometry(QRect(800, 200, 51, 31));
-        Sel_Bit_03->setFont(font6);
+        Sel_Bit_03->setFont(font3);
         Sel_Bit_03->setAutoFillBackground(false);
         Sel_Bit_03->setStyleSheet(QStringLiteral(""));
         Sel_Bit_03->setCheckable(true);
         label_7 = new QLabel(tab_camac);
         label_7->setObjectName(QStringLiteral("label_7"));
         label_7->setGeometry(QRect(500, 40, 61, 20));
-        label_7->setFont(font8);
+        label_7->setFont(font5);
         label_7->setTextFormat(Qt::RichText);
         label_7->setWordWrap(true);
         Sel_Bit_10 = new QPushButton(tab_camac);
         Sel_Bit_10->setObjectName(QStringLiteral("Sel_Bit_10"));
         Sel_Bit_10->setGeometry(QRect(380, 200, 51, 31));
-        Sel_Bit_10->setFont(font6);
+        Sel_Bit_10->setFont(font3);
         Sel_Bit_10->setAutoFillBackground(false);
         Sel_Bit_10->setStyleSheet(QStringLiteral(""));
         Sel_Bit_10->setCheckable(true);
         Sel_Bit_16 = new QPushButton(tab_camac);
         Sel_Bit_16->setObjectName(QStringLiteral("Sel_Bit_16"));
         Sel_Bit_16->setGeometry(QRect(20, 200, 51, 31));
-        Sel_Bit_16->setFont(font6);
+        Sel_Bit_16->setFont(font3);
         Sel_Bit_16->setAutoFillBackground(false);
         Sel_Bit_16->setStyleSheet(QStringLiteral(""));
         Sel_Bit_16->setCheckable(true);
         Sel_Bit_13 = new QPushButton(tab_camac);
         Sel_Bit_13->setObjectName(QStringLiteral("Sel_Bit_13"));
         Sel_Bit_13->setGeometry(QRect(200, 200, 51, 31));
-        Sel_Bit_13->setFont(font6);
+        Sel_Bit_13->setFont(font3);
         Sel_Bit_13->setAutoFillBackground(false);
         Sel_Bit_13->setStyleSheet(QStringLiteral(""));
         Sel_Bit_13->setCheckable(true);
         label_2 = new QLabel(tab_camac);
         label_2->setObjectName(QStringLiteral("label_2"));
         label_2->setGeometry(QRect(300, 10, 31, 21));
-        label_2->setFont(font8);
+        label_2->setFont(font5);
         Stop_ALL_pushButton = new QPushButton(tab_camac);
         Stop_ALL_pushButton->setObjectName(QStringLiteral("Stop_ALL_pushButton"));
         Stop_ALL_pushButton->setGeometry(QRect(700, 310, 111, 51));
@@ -396,20 +339,20 @@ public:
         label_41 = new QLabel(Frequency_frame);
         label_41->setObjectName(QStringLiteral("label_41"));
         label_41->setGeometry(QRect(250, 70, 151, 21));
-        QFont font9;
-        font9.setPointSize(10);
-        label_41->setFont(font9);
+        QFont font6;
+        font6.setPointSize(10);
+        label_41->setFont(font6);
         Sel_Bit_14 = new QPushButton(tab_camac);
         Sel_Bit_14->setObjectName(QStringLiteral("Sel_Bit_14"));
         Sel_Bit_14->setGeometry(QRect(140, 200, 51, 31));
-        Sel_Bit_14->setFont(font6);
+        Sel_Bit_14->setFont(font3);
         Sel_Bit_14->setAutoFillBackground(false);
         Sel_Bit_14->setStyleSheet(QStringLiteral(""));
         Sel_Bit_14->setCheckable(true);
         Sel_Bit_05 = new QPushButton(tab_camac);
         Sel_Bit_05->setObjectName(QStringLiteral("Sel_Bit_05"));
         Sel_Bit_05->setGeometry(QRect(680, 200, 51, 31));
-        Sel_Bit_05->setFont(font6);
+        Sel_Bit_05->setFont(font3);
         Sel_Bit_05->setAutoFillBackground(false);
         Sel_Bit_05->setStyleSheet(QStringLiteral(""));
         Sel_Bit_05->setCheckable(true);
@@ -426,7 +369,9 @@ public:
         Frequency_comboBox = new QComboBox(tab_camac);
         Frequency_comboBox->setObjectName(QStringLiteral("Frequency_comboBox"));
         Frequency_comboBox->setGeometry(QRect(870, 81, 201, 41));
-        Frequency_comboBox->setFont(font4);
+        QFont font7;
+        font7.setPointSize(16);
+        Frequency_comboBox->setFont(font7);
         line = new QFrame(tab_camac);
         line->setObjectName(QStringLiteral("line"));
         line->setGeometry(QRect(0, 500, 1091, 16));
@@ -617,16 +562,11 @@ public:
         Load_commands_pushButton->setObjectName(QStringLiteral("Load_commands_pushButton"));
         Load_commands_pushButton->setGeometry(QRect(680, 450, 341, 41));
         Load_commands_pushButton->setFont(font1);
-        label_23 = new QLabel(tab_camac);
-        label_23->setObjectName(QStringLiteral("label_23"));
-        label_23->setGeometry(QRect(430, 390, 161, 20));
-        label_23->setFont(font6);
         tabWidget->addTab(tab_camac, icon, QString());
         Frequency_frame->raise();
         A_spinBox->raise();
         X_label->raise();
         Clear_All->raise();
-        groupBox->raise();
         Sel_Bit_04->raise();
         Sel_Bit_09->raise();
         X_label_2->raise();
@@ -696,7 +636,6 @@ public:
         Start_Aquisition_pushButton->raise();
         label_39->raise();
         Load_commands_pushButton->raise();
-        label_23->raise();
         tab_Single_NOT_ADP16 = new QWidget();
         tab_Single_NOT_ADP16->setObjectName(QStringLiteral("tab_Single_NOT_ADP16"));
         tab_Single_NOT_ADP16->setAutoFillBackground(false);
@@ -706,16 +645,12 @@ public:
         SINGLE_widget->setGeometry(QRect(10, 60, 800, 400));
         SINGLE_widget->setAutoFillBackground(false);
         SINGLE_widget->setStyleSheet(QStringLiteral("color: rgb(255, 255, 0);"));
-        label_21 = new QLabel(tab_Single_NOT_ADP16);
-        label_21->setObjectName(QStringLiteral("label_21"));
-        label_21->setGeometry(QRect(1000, 50, 61, 31));
-        QFont font10;
-        font10.setPointSize(18);
-        label_21->setFont(font10);
         N_Spectral_spinBox_Single = new QSpinBox(tab_Single_NOT_ADP16);
         N_Spectral_spinBox_Single->setObjectName(QStringLiteral("N_Spectral_spinBox_Single"));
         N_Spectral_spinBox_Single->setGeometry(QRect(830, 90, 121, 51));
-        N_Spectral_spinBox_Single->setFont(font10);
+        QFont font8;
+        font8.setPointSize(18);
+        N_Spectral_spinBox_Single->setFont(font8);
         N_Spectral_spinBox_Single->setMinimum(1);
         N_Spectral_spinBox_Single->setMaximum(23);
         N_Spectral_spinBox_Single->setValue(17);
@@ -729,23 +664,13 @@ public:
         label_22 = new QLabel(tab_Single_NOT_ADP16);
         label_22->setObjectName(QStringLiteral("label_22"));
         label_22->setGeometry(QRect(870, 50, 21, 31));
-        label_22->setFont(font10);
-        N_Spectral_Channel_spinBox_Single = new QSpinBox(tab_Single_NOT_ADP16);
-        N_Spectral_Channel_spinBox_Single->setObjectName(QStringLiteral("N_Spectral_Channel_spinBox_Single"));
-        N_Spectral_Channel_spinBox_Single->setGeometry(QRect(980, 90, 121, 51));
-        N_Spectral_Channel_spinBox_Single->setFont(font10);
-        N_Spectral_Channel_spinBox_Single->setMinimum(1);
-        N_Spectral_Channel_spinBox_Single->setMaximum(16);
+        label_22->setFont(font8);
         tabWidget->addTab(tab_Single_NOT_ADP16, QString());
-        label_21->raise();
         N_Spectral_spinBox_Single->raise();
         Show_Selected_Spectral_Single_pushButton->raise();
         Show_Spectral_Selected_From_File_Single_pushButton->raise();
         label_22->raise();
-        N_Spectral_Channel_spinBox_Single->raise();
         SINGLE_widget->raise();
-
-
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -760,7 +685,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(2);
+        tabWidget->setCurrentIndex(0);
         Frequency_comboBox->setCurrentIndex(-1);
 
 
@@ -769,11 +694,9 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "KK_Control", 0));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "KK_USB_01", 0));
         X_label->setText(QApplication::translate("MainWindow", "X", 0));
         Clear_All->setText(QApplication::translate("MainWindow", "\320\241\320\221\320\240\320\236\320\241\320\230\320\242\320\254", 0));
-        NAF_Data_Label->setText(QApplication::translate("MainWindow", "00       00       00         00", 0));
-        label_4->setText(QApplication::translate("MainWindow", " 7..0        15 - 8     23 - 16       31- 24", 0));
         Sel_Bit_04->setText(QApplication::translate("MainWindow", "04", 0));
         Sel_Bit_09->setText(QApplication::translate("MainWindow", "09", 0));
         X_label_2->setText(QApplication::translate("MainWindow", "Q", 0));
@@ -821,16 +744,11 @@ public:
         Start_Aquisition_pushButton->setText(QApplication::translate("MainWindow", "\320\227\320\260\320\277\321\203\321\201\321\202\320\270\321\202\321\214 \320\235\320\260\320\261\320\276\321\200", 0));
         label_39->setText(QApplication::translate("MainWindow", "01", 0));
         Load_commands_pushButton->setText(QApplication::translate("MainWindow", "\320\227\320\260\320\263\321\200\321\203\320\267\320\270\321\202\321\214 \320\272\320\276\320\274\320\260\320\275\320\264\321\213 \320\270\320\267 \321\204\320\260\320\271\320\273\320\260", 0));
-        label_23->setText(QApplication::translate("MainWindow", "\320\232\320\276\320\264 \320\272\320\276\320\274\320\260\320\275\320\264\321\213 \320\232\320\220\320\234\320\220\320\232", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_camac), QApplication::translate("MainWindow", "KK manual", 0));
-        label_21->setText(QApplication::translate("MainWindow", "Chan.", 0));
         Show_Selected_Spectral_Single_pushButton->setText(QApplication::translate("MainWindow", "\320\237\320\236\320\232\320\220\320\227\320\220\320\242\320\254 Real Time", 0));
         Show_Spectral_Selected_From_File_Single_pushButton->setText(QApplication::translate("MainWindow", "\320\237\320\276\320\272\320\260\320\267\320\260\321\202\321\214 \320\270\320\267 \321\204\320\260\320\271\320\273\320\260", 0));
         label_22->setText(QApplication::translate("MainWindow", "N", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_Single_NOT_ADP16), QApplication::translate("MainWindow", "Single", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tab_ADP16_Alpha_Spectral), QApplication::translate("MainWindow", "ADP16 Alpha", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tab_FISSION), QApplication::translate("MainWindow", "ADP16 Fission", 0));
-        tabWidget->setTabWhatsThis(tabWidget->indexOf(tab_FISSION), QApplication::translate("MainWindow", "LayOut of fission soectral", 0));
     } // retranslateUi
 
 };

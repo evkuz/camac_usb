@@ -394,8 +394,8 @@ void MainWindow::Update_Label(void)
     str.insert(20,"         "); //+7
    // str.insert(26,"      "); //+8
 
-    ui->NAF_Data_Label->clear();
-    ui->NAF_Data_Label->setText(str);
+//    ui->NAF_Data_Label->clear();
+//    ui->NAF_Data_Label->setText(str);
 
 }
 //+++++++++++++++++
@@ -532,7 +532,7 @@ void MainWindow::on_Clear_All_clicked()
     ui->A_spinBox->setValue(A_CAMAC);
     ui->F_spinBox->setValue(F_CAMAC);
 
-    ui->NAF_Data_Label->setText(str);
+ //   ui->NAF_Data_Label->setText(str);
 
     X = FALSE; Q = FALSE;
 

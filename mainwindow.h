@@ -88,7 +88,7 @@ public:
 #define Probe_chan      0x07D0 // 2000 Номер канала отрисовки.
 #define Probe_chan_2      0x07E9 // 2025 Номер канала отрисовки.
 
-#define Spectral_Data_File   "./Camac_Thread_data_000.bin"
+#define Spectral_Data_File   "./Camac_data_000.bin"
 #define Log_File_Name        "./camac.log"
 #define Camac_Commands_File  "./camac_commands.txt"
 

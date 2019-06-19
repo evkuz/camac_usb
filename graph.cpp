@@ -46,8 +46,8 @@ void Plot::Draw_Spectral_N_Chan_Slot (QByteArray * ibuf) //QByteArray &ibuf
     QString mydata;
 
     UINT8 msb, lsb;
-    char mbuf_7, st_number_index_mbuf;
-    UINT8 st_number_value_mbuf;
+    char mbuf_7;
+    UINT8 st_number_value_mbuf, st_number_index_mbuf;
 
   //  int dot_number; //Количество точек в  Hyst_Single->intervals не может быть больше int
 
@@ -57,7 +57,7 @@ void Plot::Draw_Spectral_N_Chan_Slot (QByteArray * ibuf) //QByteArray &ibuf
 
   // Откуда тут знание о "command_type" ?
   // А из слота
-     mbuf_7 == '\xf0'; // Инициализируем
+     mbuf_7 = '\xf0'; // Инициализируем
 
     switch (command_type) //См "Формат данных4.docx"
     {
