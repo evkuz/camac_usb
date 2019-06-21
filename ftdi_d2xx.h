@@ -51,6 +51,8 @@ public:
 #define accum_buffer_SIZE  0x400000 // это 4 194 304 байт !
 #define USB_Buffer_Size   65536 //10000  0xFFC0
                          // on USB2.0, we have found that transfer sizes greater than  64K fail catastrophically.
+#define data_file_max_size 0xC00000 //0xC00000= 12 582 912
+
 
 /*
 Note that, currently, FT_SetUSBParameters supports transfer size changes for the IN endpoint
@@ -149,7 +151,8 @@ int Read_A_Single (char *buf_data, int buf_size);   // Считывает дан
 int File_Open(QString fname); //Открыть файл на запись данных, полученных по USB
 int Log_File_Open(QString lname);
 
-void Purge_USB_Buffers(void);
+void Purge_USB_Buffers(void); // Очистка FTDI буфферов
+void Purge_Data_Buffer(void); // Очистка буфферов с накопленными данными.
 
 int Write_B_Single(char *OutBuffer, int numbytes); // Запись данных из ПК в порт 'В' 1-кратный режим
 int Write_B(char *OutBuffer, int numbytes); //запись данных в канал 'B' в поточном режиме
@@ -205,6 +208,8 @@ public slots:
     void Get_Spectral_Points_Slot(); // Делаем выборку данных из файла для обновления спектра.
 
     void make_io_file_slot(); // Слот обработки сигнала void make_io_file_signal();
+
+    void clear_data_buffers_slot();// Слот очистки буфферов с точками отрисовки
 
 };
 

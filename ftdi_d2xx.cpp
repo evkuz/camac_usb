@@ -107,7 +107,7 @@ int FTDI_D2XX::ftdi_init(char *looking_for_device_A, char *looking_for_device_B)
                 ftHandle_A = &ftHandleTemp;
                // ftStatus = FT_GetDeviceInfoDetail(DevNumber_A, &Flags, &Type, &ID, &LocId, SerialNumber, Description, &ftHandle_A);
                 ftStatus = FT_Open(DevNumber_A, &ftHandle_A);
-                if (ftStatus !=0) {ft_error_code = 0x0003; return ft_error_code;} //Порт А не смогли отктрыть, хотя устройство подключено
+                if (ftStatus !=0) {ft_error_code = 0x0003; return ft_error_code;} //Порт А не смогли открыть, хотя устройство подключено
                 ft_error_code = FTDI_OK; // Все хорошо                             //и SerialNumber совпадает
 
                 ftStatus = FT_SetUSBParameters(ftHandle_A,USB_Buffer_Size, 0); // USB_Buffer_Size
@@ -328,7 +328,7 @@ if (mfile.isOpen())
     if (dwNumBytesRead != numBytes) {KK_Write_To_Log(0xeeee, "Error on Write to file!\n");}
     quint64 fsize = mfile.size();
 
-     if (fsize >= 0xC00000) //‭0x100000 = 1048576‬  0x40 0000 = ‭4194304‬  0x10 000 = 65536 (1min) 0x800000 = 8 388 608 байт
+     if (fsize >= data_file_max_size) //‭0x100000 = 1048576‬  0x40 0000 = ‭4194304‬  0x10 000 = 65536 (1min) 0x800000 = 8 388 608 байт
     {                                                                              //          0xC00000= 12 582 912
      // 02.11.2017
 
@@ -347,22 +347,18 @@ if (mfile.isOpen())
         else { BUF_PTR = &BUF_01; CURRENT_BUFFER_INDEX_1 = TRUE; BUF_02.clear();}
 mutex.unlock();
 
-      //Останавливаем поток, пишем файл на диск.
-
-   //  emit Thread_Pause_Signal();
-       //QString
        fname = mfile.fileName();
        mfile.close(); //if (!ftStatus) { str.sprintf("Неудалось СЛИТЬ данные\n"); emit Show_data(str);}
        KK_Write_To_Log(0xeeee, "File is written on disk \n");
-       str = fname.right(7);
+       str = fname.right(7); // Camac_Thread_data_000.bin
        str = str.left(3);
       int     index = str.toInt();  // Получили индекс файла
               index++; //Увеличили индекс для следующего файла
       QString newindex = QString::number(index);
        if (index <10) newindex.prepend("00");
        if (index > 9 && index < 100 ) newindex.prepend("0");
-       fname.replace(20,3,newindex); //qDebug() << fname;
-
+      // fname.replace(20,3,newindex); //qDebug() << fname; засада для // Camac_data_000.bin
+         fname.replace(13,3,newindex); //qDebug() << fname; Правильный вариант для // Camac_data_000.bin
 
      //  QString str_2; str_2 = str.append("xxx");
     //   mfile.setFileName(fname);
@@ -490,6 +486,13 @@ void FTDI_D2XX::Purge_USB_Buffers(void)
 
 }
 //+++++++++++++=
+void FTDI_D2XX::Purge_Data_Buffer(void)
+{
+    BUF_01.clear();
+    BUF_02.clear();
+
+}
+//++++++++++++++++++++++++
 int FTDI_D2XX::Get_RxBytes(void)
 {
   int num;
@@ -731,7 +734,7 @@ void FTDI_D2XX::make_io_file_slot()
        QString newindex = QString::number(index);
         if (index <10) newindex.prepend("00");
         if (index > 9 && index < 100 ) newindex.prepend("0");
-        fname.replace(20,3,newindex); //qDebug() << fname;
+        fname.replace(13,3,newindex); //qDebug() << fname;
 
 
       //  QString str_2; str_2 = str.append("xxx");
@@ -745,3 +748,8 @@ void FTDI_D2XX::make_io_file_slot()
 
 }
 //===================================================
+// Очищаем буфферы с точками отрисовки
+void FTDI_D2XX::clear_data_buffers_slot()
+{
+    Purge_Data_Buffer();
+}

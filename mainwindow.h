@@ -192,6 +192,7 @@ signals:
 //    void Get_Spectral_Points_Signal();
     void pass_N_SPECTRAL_signal (UINT8 *, UINT8);
     void make_io_file_signal(); // Сигнал для создания/открытия нового файла на запись после закрытия потоков.
+    void clear_data_buffers_signal();
 private slots:
 
 //++++++++++++++++++++++++++++++++++++++++++++++
@@ -273,6 +274,10 @@ private slots:
 //    void on_N_Spectral_Channel_spinBox_Single_editingFinished();
 
 //    void on_N_Spectral_Channel_spinBox_Single_valueChanged(const QString &arg1);
+
+    void on_Show_Spectral_Selected_From_File_Single_pushButton_clicked();
+
+    void on_pushButton_Clear_Hyst_clicked();
 
 private:
     Ui::MainWindow *ui;

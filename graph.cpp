@@ -1,6 +1,7 @@
 #include "graph.h"
 
 //++++++++++++++++++++++++++++++++++++++++++++++
+/*
 void Draw_Spectral_N_Chan (QByteArray *qbuf, UINT8 N_number, UINT8 Chan_number)
 {
 //Выборка данных из массива qbuf для заданной станции - N_number и канала в этой станции - Chan_number,
@@ -8,6 +9,7 @@ void Draw_Spectral_N_Chan (QByteArray *qbuf, UINT8 N_number, UINT8 Chan_number)
 // Пока гистограмма одна - можно и без указателя, а вот если будем добавлять
 
 }
+*/
 //+++++++++++
 /*
 void Plot::ek_drawLines(void)

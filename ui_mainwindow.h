@@ -196,7 +196,7 @@ public:
         Sel_Bit_07->setCheckable(true);
         Status_label = new QLabel(tab_camac);
         Status_label->setObjectName(QStringLiteral("Status_label"));
-        Status_label->setGeometry(QRect(650, 30, 251, 20));
+        Status_label->setGeometry(QRect(650, 30, 301, 20));
         Status_label->setFont(font1);
         F_spinBox = new QSpinBox(tab_camac);
         F_spinBox->setObjectName(QStringLiteral("F_spinBox"));

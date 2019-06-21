@@ -28,7 +28,8 @@ HEADERS  += mainwindow.h \
     graph.h \
     tab_camac_paint.h \
     stat.h \
-    command_list.h
+    command_list.h \
+    buffer_of_hyst_points.h
 
 
 FORMS    += mainwindow.ui

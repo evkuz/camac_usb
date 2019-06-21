@@ -183,7 +183,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect (Hyst_Single, SIGNAL(Show_data_signal(QString)), this, SLOT(Output_text_to_window(QString)));
     connect (KAN, SIGNAL(Draw_Spectral_N_Chan_Signal(QByteArray *)), Hyst_Single, SLOT(Draw_Spectral_N_Chan_Slot(QByteArray *)) ); //QByteArray
 
-
+    // Очистка буфферов с точками отрисовки
+    connect (this, SIGNAL(clear_data_buffers_signal()), KAN, SLOT(clear_data_buffers_slot()) );
 
 
 //++++++++++++++++++++++++++++++++++++++++++++ End of QWT +++++++++++++++++++++
@@ -252,17 +253,18 @@ if (value == FTDI_OK) {camac_tab->KK_connected = TRUE;
  //  Camac_Run_Always(); // Задаем массив [11202222]
 
    //Обновляем буффер в класее FTDI
-  emit push_data_buffer(byOutputBuffer); // Копируем данные массива byOutputBuffer в массив внутри класса FTDI_D2XX
+//  emit push_data_buffer(byOutputBuffer); // Копируем данные массива byOutputBuffer в массив внутри класса FTDI_D2XX
 
    //ОТправляем СПЕЦ-команду
-   ftdi_answer_parser( 0x0400 + KAN->Write_B_Single(byOutputBuffer, TRANSFER_SIZE) ); // First send command
+//   ftdi_answer_parser( 0x0400 + KAN->Write_B_Single(byOutputBuffer, TRANSFER_SIZE) ); // First send command
 
 
    Sleep(1);
    //Запускаем набор в потоке сразу при старте программы
+   KAN->Purge_USB_Buffers();
    emit on_Start_Aquisition_pushButton_clicked();
 
-   KAN->Purge_USB_Buffers();
+
 
 } //Девайс подключен
 //Выдаем в GUI результат работы функции ftdi_init(), список устрйоств
@@ -879,7 +881,7 @@ void MainWindow::on_SEND_TO_USB_pushButton_clicked()
         update();
 
     }
-    else {//if  (index == 0) // Если циклически, то запускаем поток.
+    else {//if  (index == 0) // Если циклически, то запускаем поток. 19.06.2019 А еще надо сменть надпись "Ручной режим" на "Циклический режим"
 
       //  if (timer->isActive()) {timer->stop();} //Стопорим таймер, т.к. щас мигать начнет конкретно
 
@@ -896,7 +898,7 @@ void MainWindow::on_SEND_TO_USB_pushButton_clicked()
  //       thread_A->start(QThread::HighPriority); //Пишем из Железа в ПК по каналу A
  //       }
         Write_To_Log(0x1000, "Запущен постоянный набор\n");
-        ui->Status_label->setText("ИДЕТ НАБОР ДАННЫХ !");
+        ui->Status_label->setText("ЦИКЛИЧЕСКИЙ РЕЖИМ ОБМЕНА !");
         ui->Status_label->setTextFormat(Qt::RichText);
         timer_flash->start(250); // таймер мигающий индикатором связи
 
@@ -941,7 +943,8 @@ void MainWindow::on_pushButton_stop_Sending_clicked()
 void MainWindow::on_Stop_ALL_pushButton_clicked()
 {
    if (timer_flash->isActive()) {timer_flash->stop();}
-    camac_tab->KK_connected = FALSE;
+
+ //   camac_tab->KK_connected = FALSE; Мы же не отключаемся, а просто остановили обмен.
 
     KAN->KK_Write_To_Log(0x3000, "Нажата кнопка **Stop ALL**\n");
 
@@ -1314,11 +1317,11 @@ void MainWindow::on_Start_Aquisition_pushButton_clicked()
     //Camac_Run_Always();  // Для тестов
 
     //Обновляем буффер в класее FTDI
-   emit push_data_buffer(byOutputBuffer); // Копируем данные массива byOutputBuffer в массив внутри класса FTDI_D2XX
+ //  emit push_data_buffer(byOutputBuffer); // Копируем данные массива byOutputBuffer в массив внутри класса FTDI_D2XX
 
-
-    //ОТправляем СПЕЦ-команду
-    ftdi_answer_parser( 0x0400 + KAN->Write_B_Single(byOutputBuffer, TRANSFER_SIZE) ); // First send command
+    // 19.06.2019 А не устарело ли ? Закомментил на всяк случ.
+    //ОТправляем СПЕЦ-команду    
+//    ftdi_answer_parser( 0x0400 + KAN->Write_B_Single(byOutputBuffer, TRANSFER_SIZE) ); // First send command
 
 
     Sleep(1);
@@ -1723,7 +1726,7 @@ void MainWindow::ftdi_answer_parser(int value)
 
     case 0x0006: Write_To_Log(value, "ftdi_init()-> Устройство не подключено !!!\n Подключите устройство и перезапустите программу\n"); break; //Канал В в устройстве не подключен. Не могу передать команду
 
-    case 0x0007: Write_To_Log(value, "ftdi_init()->Не удалось собрать детализацию остройств!\n");  break;
+    case 0x0007: Write_To_Log(value, "ftdi_init()->Не удалось собрать детализацию устройств!\n");  break;
 
     case 0x0AAA:  Write_To_Log(value, "ftdi_init()->Устройство распознано!\n");  break;
 
@@ -1803,7 +1806,7 @@ void MainWindow::ftdi_answer_parser(int value)
 
     case 0x0300: // Общий ответ от всех функций
         //Write_To_Log(value, "Command_File_Execute()->Read_A_Single() performed correctly\n");
-        Write_To_Log(value, "Обработчик команд из файла выполнен\n");
+        Write_To_Log(value, "Команда выполнена\n");
         ;
         break;
 
@@ -1852,7 +1855,7 @@ void MainWindow::on_Load_commands_pushButton_clicked()
     ftdi_answer_parser(Command_File_Execute(Camac_Commands_File));
    // value= Command_File_Execute(Camac_Commands_File);
  //  str="Вышли из обработчик нажатия кнопки\n";Write_To_Log(value, str);
-                                                       }
+  }
 //++++++++++++++++++++++++++++++++
 // Парсим все строки командного файла.
 // Если находим ошибку в записи команды - выходим с ошибкой,пишем в лог, ни одну команду не выполняем.
@@ -1882,8 +1885,8 @@ int  MainWindow::Command_File_Execute (QString fname)
 
     if (f.open(QIODevice::ReadOnly | QIODevice::Text)) {
     n = QTextStream(&f).readAll().split('\n').count();
-    str2.sprintf("Количество строк в файле %s : %d \n", Camac_Commands_File, n);
-    Write_To_Log(value, str2);
+    str2.sprintf("Количество строк в файле %s : %d \n", Camac_Commands_File, n); Write_To_Log(value, str2);
+
 
     f.seek(0); //Важно ссссука, ведь ранее мы весь файл уже считали  n = QTextStream(&f).readAll().split('\n').count();
    // QTextStream uin(&KAN->LogFile);
@@ -1902,7 +1905,7 @@ int  MainWindow::Command_File_Execute (QString fname)
           //Строка верная, ничего не делаем
             break;
        case 1:
-          //Строка комментарий, приравниваем к правильной строке, ничего не делаем
+          //Строка комментарий, либо пустая - приравниваем к правильной строке, ничего не делаем
            ftdi_error_code += value; // 0x0301
            break;
        case 2:
@@ -1931,14 +1934,13 @@ int  MainWindow::Command_File_Execute (QString fname)
     while (!f.atEnd())
     {
         str1 = f.readLine(); // Считываем строку.
-        str1 = str1.simplified();
+        str1 = str1.simplified(); // Упрощаем,  Эта ф-ция убирает все whitespace characters
         ftdi_error_code =  parse_command_line(str1); // Парсим строку, присваиваем переменным  N, A, F, Данные
-        n++; // Увеличили счетчик выполненных команд
 
         if (!ftdi_error_code){ //Это команда, не комментарий
 
             ftdi_error_code =  KAN->Write_B_Single(byOutputBuffer, TRANSFER_SIZE); // Отправляем команду по результатам парсинга
-            ftdi_answer_parser(ftdi_error_code + value); //+ 0x0300
+           // ftdi_answer_parser(ftdi_error_code + value); //+ 0x0300 == "Команда выполнена"
             //Пишем в лог, что команда КАМАК отправлена в КК, выполнена и получен ответ на эту команду
                  if (!ftdi_error_code){ //Если возвращает '0' то для if это false, а для ftdi_answer_parser - это отсутствие ошибок
 
@@ -1946,6 +1948,7 @@ int  MainWindow::Command_File_Execute (QString fname)
                      Write_To_Log(value, str2);
                  }
                  // А если команда вернет ошибку, то это будет записано в лог. Это уже сделано в Write_B_Single()
+                 n++; // Увеличили счетчик выполненных команд
 
         }
      //   n++;
@@ -1953,8 +1956,8 @@ int  MainWindow::Command_File_Execute (QString fname)
 
     f.close();
 // Прошли через весь файл, выполнили команды.
-   str1.sprintf("Выполнено %d команд в файле %s \n", n, Camac_Commands_File); Write_To_Log(value, str1);
-   ftdi_error_code =  0x0300;
+   str1.sprintf("Выполнено %d команд(ы) в файле %s \n", n, Camac_Commands_File); Write_To_Log(value, str1);
+   ftdi_error_code =  0x0301;
  } //if (f.open(QIODevice::ReadOnly | QIODevice::Text))
 
     else {ftdi_error_code = 0x0014;} // Не могу открыть файл команд
@@ -2137,6 +2140,8 @@ void MainWindow::on_N_Spectral_spinBox_Single_valueChanged(int arg1)
     Hyst_Single->replot();
 
     // Ага, а буфер остался со старыми точками ???!!!
+    // Вот тут нам поможет
+    emit on_pushButton_Clear_Hyst_clicked();
 }
 
 
@@ -2144,3 +2149,14 @@ void MainWindow::on_N_Spectral_spinBox_Single_valueChanged(int arg1)
 
 
 
+
+
+//++++++++++++++++++++
+// Очистка окна с набранным спектром и отрисовка заново
+void MainWindow::on_pushButton_Clear_Hyst_clicked()
+{
+    emit clear_data_buffers_signal();
+    // Осталось добавить :
+    // emit  intervals buffer clearing
+    // emit hystogram replot
+}

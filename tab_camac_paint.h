@@ -5,7 +5,8 @@
 #include <QPainter>
 #include <QPixmap>
 
-
+//++++++++++++++++++++++++++++++++++++++
+// класс для объекта "Виджет индикации"
 class camac_paint : public QWidget
 {
     Q_OBJECT
