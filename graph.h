@@ -34,6 +34,7 @@ class Plot : public QwtPlot
     Q_OBJECT
 
 public:
+    Plot();
     Plot( QWidget *parent, const char *w_title, double x_min, double x_max, double y_min, double y_max, BOOL isTrigonometric ); //= NULL. Теперь не NULL, т.к. будет родитель - Альфа, fission виджет
     QwtPlotMagnifier    *Magnifier_param; //СССУУУУУУУУУУУККККАААААААААААА !!!!!!
                                           // НЕ ПУТАТЬ QwtPlotMagnifier И QwtMagnifier !!!!!!!!!
@@ -49,9 +50,10 @@ public:
     double Ch_Data; //Тестовые данные для 1 канала.
     double Ch_Data_2; //Тестовые данные для другого канала.
 
-    double Y_MAX_Current; // Текущая верхня граница графика
+    double Y_MAX_Current; // Текущая верхняя граница графика
 
-    int N_number;       //Номер станции глобальный
+    int N_number;       // Номер станции для отрисовки, передается по нажатию кнопки
+    int N_curr_number;  // текущий номер станции - это тот номер, для которого УЖЕ нарисован спектр.
     UINT8 command_type;
 
     // void Draw_Spectral_N_Chan (QByteArray *qbuf, UINT8 N_number, UINT8 Chan_number); //Выборка данных для заданной станции и канала в этой станции,

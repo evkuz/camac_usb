@@ -27,6 +27,7 @@ FTDI_D2XX::FTDI_D2XX()
   BUF_PTR = &BUF_01; //new QByteArray;//
 
 
+
   for (int i=0; i<=3200; i+=8)
   {
       t_points[i]   = 0xf0;  //1
@@ -654,7 +655,7 @@ void FTDI_D2XX::Get_Spectral_Points_Slot()
 {
 //Считываем буфер с текущими данными набора, берем "разницу" данных с предыдущими данными набора.
 // ОТправляем эту разницу на отрисовку спектра.
-   QString mstr;
+//   QString mstr;
    QByteArray increment_qbuf;
 //   quint64 buf_size;
 

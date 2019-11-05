@@ -49,7 +49,7 @@ LIBS += d:\Qt\boost_chrono\boost\bin.v2\libs\chrono\build\gcc-mingw-4.8.2\releas
 
 
 
-win32:CONFIG(release, debug|release): LIBS += d:\FPGA\ftdi_drivers_v2.12.28/i386/ -lftd2xx
+win32:CONFIG(release, debug|release): LIBS += d:\FPGA\ftdi_drivers_v2.12.28\i386\ftd2xx.lib
 #-L$$PWD/../../../../FPGA/ftdi_drivers_v2.12.28/i386/ -lftd2xx
-else:win32:CONFIG(debug, debug|release): LIBS += d:\FPGA\ftdi_drivers_v2.12.28/i386/ -lftd2xx
+else:win32:CONFIG(debug, debug|release): LIBS += d:\FPGA\ftdi_drivers_v2.12.28\i386\ftd2xx.lib
 #-L$$PWD/../../../../FPGA/ftdi_drivers_v2.12.28/i386/ -lftd2xx
