@@ -55,7 +55,7 @@
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <property name="documentMode">
      <bool>true</bool>
@@ -1657,22 +1657,6 @@
        <string>ПОКАЗАТЬ Real Time</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="Show_Spectral_Selected_From_File_Single_pushButton">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>830</x>
-        <y>280</y>
-        <width>271</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Показать из файла</string>
-      </property>
-     </widget>
      <widget class="QLabel" name="label_22">
       <property name="geometry">
        <rect>
@@ -1691,11 +1675,24 @@
        <string>N</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="pushButton_Clear_Hyst">
+      <property name="geometry">
+       <rect>
+        <x>830</x>
+        <y>290</y>
+        <width>271</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>ОЧИСТИТЬ ОКНО</string>
+      </property>
+     </widget>
      <zorder>N_Spectral_spinBox_Single</zorder>
      <zorder>Show_Selected_Spectral_Single_pushButton</zorder>
-     <zorder>Show_Spectral_Selected_From_File_Single_pushButton</zorder>
      <zorder>label_22</zorder>
      <zorder>SINGLE_widget</zorder>
+     <zorder>pushButton_Clear_Hyst</zorder>
     </widget>
    </widget>
   </widget>

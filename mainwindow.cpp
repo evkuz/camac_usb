@@ -53,7 +53,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->Frequency_comboBox->addItems(Freq_List);
     ui->Frequency_comboBox->setCurrentIndex(0); // 0 means "No Cycle", 1 means "5kHz",
 
-    ui->Show_Spectral_Selected_From_File_Single_pushButton->setVisible(false);
+    // ui->Show_Spectral_Selected_From_File_Single_pushButton->setVisible(false);
 
     ui->pushButton_stop_Sending->setVisible(false); //Кнопку "Stop Sending" делаем невидимой
 

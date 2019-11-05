@@ -275,7 +275,7 @@ private slots:
 
 //    void on_N_Spectral_Channel_spinBox_Single_valueChanged(const QString &arg1);
 
-    void on_Show_Spectral_Selected_From_File_Single_pushButton_clicked();
+//    void on_Show_Spectral_Selected_From_File_Single_pushButton_clicked();
 
     void on_pushButton_Clear_Hyst_clicked();
 

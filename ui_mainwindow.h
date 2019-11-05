@@ -113,8 +113,8 @@ public:
     QWidget *SINGLE_widget;
     QSpinBox *N_Spectral_spinBox_Single;
     QPushButton *Show_Selected_Spectral_Single_pushButton;
-    QPushButton *Show_Spectral_Selected_From_File_Single_pushButton;
     QLabel *label_22;
+    QPushButton *pushButton_Clear_Hyst;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -657,20 +657,19 @@ public:
         Show_Selected_Spectral_Single_pushButton = new QPushButton(tab_Single_NOT_ADP16);
         Show_Selected_Spectral_Single_pushButton->setObjectName(QStringLiteral("Show_Selected_Spectral_Single_pushButton"));
         Show_Selected_Spectral_Single_pushButton->setGeometry(QRect(830, 190, 271, 51));
-        Show_Spectral_Selected_From_File_Single_pushButton = new QPushButton(tab_Single_NOT_ADP16);
-        Show_Spectral_Selected_From_File_Single_pushButton->setObjectName(QStringLiteral("Show_Spectral_Selected_From_File_Single_pushButton"));
-        Show_Spectral_Selected_From_File_Single_pushButton->setEnabled(false);
-        Show_Spectral_Selected_From_File_Single_pushButton->setGeometry(QRect(830, 280, 271, 51));
         label_22 = new QLabel(tab_Single_NOT_ADP16);
         label_22->setObjectName(QStringLiteral("label_22"));
         label_22->setGeometry(QRect(870, 50, 21, 31));
         label_22->setFont(font8);
+        pushButton_Clear_Hyst = new QPushButton(tab_Single_NOT_ADP16);
+        pushButton_Clear_Hyst->setObjectName(QStringLiteral("pushButton_Clear_Hyst"));
+        pushButton_Clear_Hyst->setGeometry(QRect(830, 290, 271, 51));
         tabWidget->addTab(tab_Single_NOT_ADP16, QString());
         N_Spectral_spinBox_Single->raise();
         Show_Selected_Spectral_Single_pushButton->raise();
-        Show_Spectral_Selected_From_File_Single_pushButton->raise();
         label_22->raise();
         SINGLE_widget->raise();
+        pushButton_Clear_Hyst->raise();
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -685,7 +684,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
         Frequency_comboBox->setCurrentIndex(-1);
 
 
@@ -746,8 +745,8 @@ public:
         Load_commands_pushButton->setText(QApplication::translate("MainWindow", "\320\227\320\260\320\263\321\200\321\203\320\267\320\270\321\202\321\214 \320\272\320\276\320\274\320\260\320\275\320\264\321\213 \320\270\320\267 \321\204\320\260\320\271\320\273\320\260", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_camac), QApplication::translate("MainWindow", "KK manual", 0));
         Show_Selected_Spectral_Single_pushButton->setText(QApplication::translate("MainWindow", "\320\237\320\236\320\232\320\220\320\227\320\220\320\242\320\254 Real Time", 0));
-        Show_Spectral_Selected_From_File_Single_pushButton->setText(QApplication::translate("MainWindow", "\320\237\320\276\320\272\320\260\320\267\320\260\321\202\321\214 \320\270\320\267 \321\204\320\260\320\271\320\273\320\260", 0));
         label_22->setText(QApplication::translate("MainWindow", "N", 0));
+        pushButton_Clear_Hyst->setText(QApplication::translate("MainWindow", "\320\236\320\247\320\230\320\241\320\242\320\230\320\242\320\254 \320\236\320\232\320\235\320\236", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab_Single_NOT_ADP16), QApplication::translate("MainWindow", "Single", 0));
     } // retranslateUi
 
