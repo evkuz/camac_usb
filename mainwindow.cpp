@@ -243,8 +243,11 @@ Q_flag->setGeometry(70,270,30,30);
 
 
 //метка для быстрого попадания в эту точку кода #########proga-begin#######
-int value = KAN->ftdi_init(Mini_ID_A, Mini_ID_B );
+// Комментим KAN::ftdi_init() т.к. работаем без оборудования.
 
+//int value = KAN->ftdi_init(Mini_ID_A, Mini_ID_B );
+// "Подключаем" железо
+int value = FTDI_OK;
 if (value == FTDI_OK) {camac_tab->KK_connected = TRUE;
 
    camac_tab->palette.setColor(QPalette::Light, Qt::green);

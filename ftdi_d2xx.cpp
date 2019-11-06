@@ -27,7 +27,7 @@ FTDI_D2XX::FTDI_D2XX()
   BUF_PTR = &BUF_01; //new QByteArray;//
 
 
-
+/*
   for (int i=0; i<=3200; i+=8)
   {
       t_points[i]   = 0xf0;  //1
@@ -40,6 +40,8 @@ FTDI_D2XX::FTDI_D2XX()
       t_points[i+7] = 0x80;  //8
 
   }
+*/
+
 
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -253,8 +255,10 @@ return ft_error_code;
 // Слот обработки сигнала Process_A() от потока chan_A
 void FTDI_D2XX::Read_AAA(void)
 {
-
-   ftStatus = FT_GetQueueStatus(ftHandle_A,&RxBytes); //RxBytes_2
+   // Работаем без оборудования
+   // ftStatus = FT_GetQueueStatus(ftHandle_A,&RxBytes); //RxBytes_2
+   ftStatus = FT_OK;
+   RxBytes = 8;
    if (RxBytes > 0)
     {
    //    str.sprintf("Read_AAA()->FT_GetQueueStatus()->Got %d bytes instead of 8 bytes\n", RxBytes );
@@ -274,7 +278,10 @@ void FTDI_D2XX::Read_AAA(void)
 //===================================================
 void FTDI_D2XX::Read_A(uint numBytes)
 {
-    ftStatus = FT_Read(ftHandle_A, byInputBuffer,numBytes,&dwNumBytesRead);
+ // Работаем без оборудования
+ //   ftStatus = FT_Read(ftHandle_A, byInputBuffer,numBytes,&dwNumBytesRead);
+  ftStatus = FT_OK;
+  memcpy(byInputBuffer, TEST_DATA, 8);
 
 if (ftStatus != FT_OK)
 {
