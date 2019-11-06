@@ -171,8 +171,8 @@ public slots:
     void Output_text_to_window(QString sss);
     void Device_Connected_Slot();
     void Device_NOT_connected_Slot();
-    void On_Timer();
-    void onTimer_1(void);  //Обработчик таймера 1 - запись в файл
+  //  void On_Timer();
+ //   void onTimer_1(void);  //Обработчик таймера 1 - запись в файл
 //    void onTimer_2(void);  //Обработчик таймера 2 - отрисовка спектра-гистограмма
 
     void On_Transfer_Flashing();
@@ -192,7 +192,9 @@ signals:
 //    void Get_Spectral_Points_Signal();
     void pass_N_SPECTRAL_signal (UINT8 *, UINT8);
     void make_io_file_signal(); // Сигнал для создания/открытия нового файла на запись после закрытия потоков.
-    void clear_data_buffers_signal();
+    void clear_data_buffers_signal(); // Сигнал очистки буферов USB
+    void clear_intervals_buffer_signal(); // Сигнал очистки буферов с точками гистограммы
+    void make_original_scale_signal(); // Сигнал отрисовки шкалы Y графика в исходном значении
 private slots:
 
 //++++++++++++++++++++++++++++++++++++++++++++++

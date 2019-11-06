@@ -498,6 +498,9 @@ void FTDI_D2XX::Purge_Data_Buffer(void)
 {
     BUF_01.clear();
     BUF_02.clear();
+    KK_Write_To_Log(0x1234, "Buffers are cleared \n");
+    str.sprintf("Buffer BUF_01 size is %d \n", BUF_01.size()); KK_Write_To_Log(0x1234, str);
+    str.sprintf("Buffer BUF_02 size is %d \n", BUF_02.size()); KK_Write_To_Log(0x1234, str);
 
 }
 //++++++++++++++++++++++++
@@ -677,7 +680,7 @@ void FTDI_D2XX::Get_Spectral_Points_Slot()
 
 
  // f_size = qbuf.size(); //Вот тут может возникнуть отрицательное число !!!
-  if (f_size < f_old_size) {f_offset = f_size;  KK_Write_To_Log(0x9999, "Negative OFFSET ! \n");}
+  if (f_size < f_old_size) {f_offset = f_size;  KK_Write_To_Log(0x9999, "Negative OFFSET ! Or buffer is cleared \n");}
   else f_offset = f_size - f_old_size ;
   f_old_size = f_size;             // буфер только что сменился и у него еще размер МЕНЬШЕ, ЧЕМ f_old_size
 
@@ -756,7 +759,9 @@ void FTDI_D2XX::make_io_file_slot()
 
 }
 //===================================================
+// Слот сигнала внутри слота нажатия кнопки "Очиститть окно" на вкладке "Single"
 // Очищаем буфферы с точками отрисовки
+//
 void FTDI_D2XX::clear_data_buffers_slot()
 {
     Purge_Data_Buffer();

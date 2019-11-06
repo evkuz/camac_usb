@@ -183,16 +183,17 @@ MainWindow::MainWindow(QWidget *parent) :
     connect (Hyst_Single, SIGNAL(Show_data_signal(QString)), this, SLOT(Output_text_to_window(QString)));
     connect (KAN, SIGNAL(Draw_Spectral_N_Chan_Signal(QByteArray *)), Hyst_Single, SLOT(Draw_Spectral_N_Chan_Slot(QByteArray *)) ); //QByteArray
 
-    // Очистка буфферов с точками отрисовки
+    // Очистка буфферов с точками отрисовки, отрисовка шкалы в исходное значение
     connect (this, SIGNAL(clear_data_buffers_signal()), KAN, SLOT(clear_data_buffers_slot()) );
-
+    connect (this, SIGNAL(clear_intervals_buffer_signal()), Hyst_Single, SLOT(clear_intervals_buffer_slot()) );
+    connect(this, SIGNAL(make_original_scale_signal()), Hyst_Single, SLOT(make_original_scale_slot()) );
 
 //++++++++++++++++++++++++++++++++++++++++++++ End of QWT +++++++++++++++++++++
 //++++++++++++++++++++++++++++++++++++++++++++ timers signal/slot assignment
 
-           timer_1 = new QTimer(this); // Таймер записи в файл
+   //        timer_1 = new QTimer(this); // Таймер записи в файл
   //         connect(timer_1, SIGNAL( timeout() ), Hyst_Single, SLOT( onTimer_1() ) );
-           connect(timer_1, SIGNAL( timeout() ), this, SLOT( onTimer_1() ) );
+    //       connect(timer_1, SIGNAL( timeout() ), this, SLOT( onTimer_1() ) );
    //       timer_1->setInterval(20); timer_1->start();
 
           timer_2 = new QTimer(this); //Таймер отрисовки спектра onLine
@@ -288,6 +289,9 @@ MainWindow::~MainWindow()
     delete ui;
     //KAN->mfile.close();
     delete KAN;
+    delete Hyst_Single;
+    delete timer;
+    delete timer_2;
 }
 //+++++++++++++++++++++++++++++++++++
 /*
@@ -1053,7 +1057,8 @@ update();
 //+++++++++++++++++++++++++++++++++++++++
 
 //++++++++++++++++++++++++++++++++ QWT ++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//+++++++++++ SLOT of timer_1
+//+++++++++++ SLOT of
+/*
 void MainWindow::onTimer_1()
 {
  //Пишем файл данные от N17, канал 1.
@@ -1069,6 +1074,7 @@ void MainWindow::onTimer_1()
      }
 
 }//onTimer_1()
+*/
 //+++++++++++++++++++++++++++++++++++++++
 
 //+++++++++++ SLOT of timer_2
@@ -1223,11 +1229,13 @@ void MainWindow::Device_NOT_connected_Slot()
 
 }
 //+++++++++++++++++++++++++++++++++++++
+/*
 void MainWindow::On_Timer()
 {
   //if (!camac_tab->KK_connected) ftdi_answer_parser(KAN->ftdi_init());
 ;
 }
+*/
 //+++++++++++++++++++++++++++
 void MainWindow::On_Transfer_Flashing()
 {
@@ -2059,7 +2067,8 @@ void MainWindow::on_Show_Selected_Spectral_Single_pushButton_clicked()
 
     //Передаем значение N_SPECTRAL в класс Plot
 
- //   Write_To_Log(0, "Передаю номер станции \n");
+    Write_To_Log(0, "Нажата кнопка 'ПОКАЗАТЬ Real Time'\n");
+    // Вот в этой точке можем принять решение о перерисовке окна, если номер станции другой.
     emit pass_N_SPECTRAL_signal (&N_SPECTRAL, COMMAND_b2);
 
 
@@ -2155,11 +2164,12 @@ void MainWindow::on_N_Spectral_spinBox_Single_valueChanged(int arg1)
 
 
 //++++++++++++++++++++
+// Слот нажатия кнопки "Очиститть окно" на вкладке "Single"
 // Очистка окна с набранным спектром и отрисовка заново
 void MainWindow::on_pushButton_Clear_Hyst_clicked()
 {
-    emit clear_data_buffers_signal();
-    // Осталось добавить :
-    // emit  intervals buffer clearing
-    // emit hystogram replot
+    emit clear_data_buffers_signal();     // Сигнал очистки буферов USB
+    emit clear_intervals_buffer_signal(); // Сигнал очистки буферов с точками гистограммы
+    emit make_original_scale_signal();    // Сигнал отрисовки шкалы Y графика в исходном значении
 }
+//+++++++++++++++++++++++++

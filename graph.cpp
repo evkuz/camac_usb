@@ -120,6 +120,10 @@ void Plot::Draw_Spectral_N_Chan_Slot (QByteArray * ibuf) //QByteArray &ibuf
  //       Write_To_Log(0x2000, mydata);
 
 
+// Ответ на команду b0
+
+ //          if ((mbuf[0] == '\xf0')
+
 //Обработка прерываний от других блоков (пока только чтение по A(0)*F(0))
            if ((mbuf[0] == '\xf0') && (mbuf[7] == mbuf_7) && ((mbuf[st_number_index_mbuf] & st_number_value_mbuf)== N_number)) //D1 - q + x + N=17
            {
@@ -160,7 +164,8 @@ void Plot::Draw_Spectral_N_Chan_Slot (QByteArray * ibuf) //QByteArray &ibuf
 //++++++++++++++++++++++++++++++++++++=
 //+++++++++++
 // Это слот сигнала, запускаемого из слота обработки timer_2(timeout)
-//Принимаем значение станции + номер типа команды для выборки данных на отрисовку спектра
+// Принимаем значение станции + номер типа команды для выборки данных на отрисовку спектра
+// Сохраняем полученное значение номера станции в "public" переменную для класса plot
 void Plot::pass_N_SPECTRAL_slot (UINT8 * st_number, UINT8 comm_type)
 {
     QString str;
@@ -172,4 +177,27 @@ void Plot::pass_N_SPECTRAL_slot (UINT8 * st_number, UINT8 comm_type)
 
 }
 //+++++++++++++++++++++++++++++++++++++++
+// Слот очистки буферов с точками гистограммы
+// Вызывается сигналом очистки буферов
+void Plot::clear_intervals_buffer_slot()
+{
+    QString str;
+    int cap = this->intervals->size();
+    this->intervals->clear();
+    this->Ch_Data = 0;
+    str.sprintf("Intervals before clear is %d, and after clearing is %d", cap, this->intervals->size() );
 
+    emit Show_data_signal(str);
+}
+//++++++++++++++++++++++++++++++++
+// Слот отрисовки шкалы Y графика в исходном значении, т.е. как при создании шкалы
+void Plot::make_original_scale_slot()
+{
+    this->Y_MAX_Current = 4096;
+    this->setAxisScale(Plot::yLeft, 0.0, this->Y_MAX_Current);
+    this->Ch_Data = 0.0;//1000000.0;// 0x0000;
+    this->Ch_Data_2 = 0.0;//0x0000;
+
+    this->replot();
+
+}

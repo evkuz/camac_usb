@@ -35,6 +35,7 @@ class Plot : public QwtPlot
 
 public:
     Plot();
+    //~Plot();
     Plot( QWidget *parent, const char *w_title, double x_min, double x_max, double y_min, double y_max, BOOL isTrigonometric ); //= NULL. Теперь не NULL, т.к. будет родитель - Альфа, fission виджет
     QwtPlotMagnifier    *Magnifier_param; //СССУУУУУУУУУУУККККАААААААААААА !!!!!!
                                           // НЕ ПУТАТЬ QwtPlotMagnifier И QwtMagnifier !!!!!!!!!
@@ -73,6 +74,8 @@ public slots:
   // Слот-обработка массива qbuf на выборку данных для заданной станции N и канала Chan_number и отрисовку гистограммы  по этим данным
   void Draw_Spectral_N_Chan_Slot (QByteArray *);
   void pass_N_SPECTRAL_slot (UINT8 * st_number, UINT8 comm_type);
+  void clear_intervals_buffer_slot(); // Слот очистки буферов с точками гистограммы
+  void make_original_scale_slot();    // Слот отрисовки шкалы Y графика в исходном значении
 
 signals  :
           void fis_resized();
