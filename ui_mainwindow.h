@@ -123,7 +123,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(1134, 593);
+        MainWindow->resize(1134, 606);
         QFont font;
         font.setPointSize(13);
         font.setBold(false);

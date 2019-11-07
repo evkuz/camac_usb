@@ -119,7 +119,8 @@ QByteArray BUF_01;// [0x100000]; //0x400000 = 4 194 304 ;// [accum_buffer_SIZE]
 QByteArray BUF_02;// [0x100000]; [accum_buffer_SIZE]
 QByteArray * BUF_PTR;// = BUF_01;
 
-const char TEST_DATA[RECEIVE_SIZE] = {0xf0, 0x11, 0x00, 0x07, 0xD0, 0x00, 0x00, 0x80}; // Тестовые данные для отрисовки спектров. Имитация hardware
+const char TEST_DATA_B2[RECEIVE_SIZE] = {0xf0, 0x11, 0x00, 0x07, 0xD0, 0x00, 0x00, 0x80}; // Тестовые данные для отрисовки спектров. Имитация hardware
+const char TEST_DATA_B0[RECEIVE_SIZE] = {0xf0, 0x11, 0x00, 0x07, 0xD0, 0x00, 0x00, 0x40}; // Тестовые данные для отрисовки спектров. Имитация hardware
 
 QDataStream EK_BUF;
 BOOL CURRENT_BUFFER_INDEX_1;

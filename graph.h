@@ -27,6 +27,7 @@
 #include <QtGui>
 #include <QList>
 
+#include <camac_devices.h>
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Отрисовка гистограммы
 class Plot : public QwtPlot

@@ -1350,6 +1350,7 @@ void MainWindow::on_Start_Aquisition_pushButton_clicked()
 
 //++++++++++++++++++++++++++++++++++++++++++
 // ADP16 ONLINE data
+// Убрано из стандартной версии, где нет ADP16
 void MainWindow::on_Show_Selected_Spectral_pushButton_clicked()
 { // По нажатию кнопки "ПОКАЗАТЬ" отображаем спектр для выбранной станции  и выбранного номера канала этой станции
 
@@ -2069,7 +2070,7 @@ void MainWindow::on_Show_Selected_Spectral_Single_pushButton_clicked()
 
     Write_To_Log(0, "Нажата кнопка 'ПОКАЗАТЬ Real Time'\n");
     // Вот в этой точке можем принять решение о перерисовке окна, если номер станции другой.
-    emit pass_N_SPECTRAL_signal (&N_SPECTRAL, COMMAND_b2);
+    emit pass_N_SPECTRAL_signal (&N_SPECTRAL, COMMAND_b0);
 
 
 

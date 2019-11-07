@@ -1,5 +1,6 @@
 #include "graph.h"
 
+
 //++++++++++++++++++++++++++++++++++++++++++++++
 /*
 void Draw_Spectral_N_Chan (QByteArray *qbuf, UINT8 N_number, UINT8 Chan_number)
@@ -64,9 +65,12 @@ void Plot::Draw_Spectral_N_Chan_Slot (QByteArray * ibuf) //QByteArray &ibuf
  //   UINT16 fdata_alpha, fdata_alpha_2;//, fdata_fission;
     QString mydata;
 
-    UINT8 msb, lsb;
-    char mbuf_7;
+    // Т.к. в разных типах блоков данные находятся в разных байтах,
+    // то номера этих байт будем хранить в переменных
+    UINT8 msb, lsb; // Старший байт, младший байт
+    char mbuf_7;    // Последний байт
     UINT8 st_number_value_mbuf, st_number_index_mbuf;
+    UINT8 st_number;
 
   //  int dot_number; //Количество точек в  Hyst_Single->intervals не может быть больше int
 
@@ -76,8 +80,9 @@ void Plot::Draw_Spectral_N_Chan_Slot (QByteArray * ibuf) //QByteArray &ibuf
 
   // Откуда тут знание о "command_type" ?
   // А из слота
-     mbuf_7 = '\xf0'; // Инициализируем
+//     mbuf_7 = '\xf0'; // Инициализируем
 
+/*
     switch (command_type) //См "Формат данных4.docx"
     {
       case 1 :
@@ -90,7 +95,7 @@ void Plot::Draw_Spectral_N_Chan_Slot (QByteArray * ibuf) //QByteArray &ibuf
         msb = 3;
         lsb = 4;
         break;
-      case 3 :   //b0
+      case 3 :   //b2
         msb = 3;
         lsb = 4;
         mbuf_7 = '\x80';           // Тип команды. это 3.
@@ -104,7 +109,7 @@ void Plot::Draw_Spectral_N_Chan_Slot (QByteArray * ibuf) //QByteArray &ibuf
 
     }
 
-
+*/
 
     buf_size = ibuf->size();
 
@@ -118,14 +123,27 @@ void Plot::Draw_Spectral_N_Chan_Slot (QByteArray * ibuf) //QByteArray &ibuf
         mbuf = bb.constData();
  //       mydata.sprintf("Байт данных на отрисовку: "); mydata.append(bb.toHex().toUpper()); mydata.append("\n");
  //       Write_To_Log(0x2000, mydata);
-
-
 // Ответ на команду b0
+// if ((mbuf[0] == '\xf0')
 
- //          if ((mbuf[0] == '\xf0')
+//+++++++++++++++ Определяем тип блока и данные для отрисовки +++++++++++++++
+           if ((mbuf[0] == '\xf0') && (mbuf[7] == type_B0) )
+           {
+             // Команда b0 задаем значения msb, lsb, определяем номер станции
+               msb = 3;
+               lsb = 4;
+               st_number = mbuf[1] & 0x1f;
+               //mydata.sprintf("Номер станции: %d", st_number); mydata.append("\n");
+               //emit Show_data_signal(mydata);
 
-//Обработка прерываний от других блоков (пока только чтение по A(0)*F(0))
-           if ((mbuf[0] == '\xf0') && (mbuf[7] == mbuf_7) && ((mbuf[st_number_index_mbuf] & st_number_value_mbuf)== N_number)) //D1 - q + x + N=17
+           }
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+//Ответ на команду типа b0:
+   //        if ((mbuf[0] == '\xf0') && (mbuf[7] == mbuf_7) && ((mbuf[st_number_index_mbuf] & st_number_value_mbuf)== N_number)) //D1 - q + x + N=17
+           if (st_number == N_number)
            {
             //fdata - это номер канала в спектре !!!!
             // НЕ ADP16 хранит данные в других байтах - 3,4
@@ -171,8 +189,12 @@ void Plot::pass_N_SPECTRAL_slot (UINT8 * st_number, UINT8 comm_type)
     QString str;
     N_number = *st_number;
     command_type = comm_type;
+    // type 1 = b0, 2 = b1, 3 = b2
+
   //  N_number = 100;
-    str.sprintf("N_number value %d, command type is %d \n", N_number, command_type);
+    //str.sprintf("N_number value %d, command type is %d \n", N_number, command_type);
+    str.sprintf("Делаем выборку для станции %d, command type is %d \n", N_number, command_type);
+
     emit Show_data_signal(str);
 
 }
