@@ -16,7 +16,7 @@
 
 //#include <QDataStream>
 #include "ftdi_d2xx.h"
-#include "graph.h"
+#include "plot.h"
 
 #include "tab_camac_paint.h"
 

@@ -3,8 +3,8 @@
 Будет рисовать гистограммы
 */
 
-#ifndef GRAPH
-#define GRAPH
+#ifndef PLOT
+#define PLOT
 
 #include <qlayout.h>
 #include <qwt_plot.h>
@@ -93,5 +93,5 @@ private:
     void add_Point(UINT16 chan_num);
 };
 
-#endif // GRAPH
+#endif // PLOT
 
