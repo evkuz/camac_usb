@@ -91,6 +91,7 @@ public:
 #define Spectral_Data_File   "./Camac_data_000.bin"
 #define Log_File_Name        "./camac.log"
 #define Camac_Commands_File  "./camac_commands.txt"
+#define Test_Data_File       "./ADP_data_000.bin"
 
 #define KK_Index 0
 #define Single_Index 1

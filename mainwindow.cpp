@@ -73,6 +73,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ftdi_answer_parser(0xf000); // Write to log-file first message
     ftdi_answer_parser( KAN->File_Open(Spectral_Data_File) ); //Open binary data file
+    //08.11.2019
+    ftdi_answer_parser( KAN->Data_File_Open(Test_Data_File)); // Open file with test data
+
 
     timer = new QTimer(this);
     connect(timer, SIGNAL( timeout() ),this , SLOT( On_Timer() ) );
@@ -1790,6 +1793,14 @@ void MainWindow::ftdi_answer_parser(int value)
     case 0x0012: str.sprintf("File %s  is opened for writing!!!\n", Log_File_Name); Write_To_Log(value, str);  break;
 
 // ============================================ END of   Блок ответов ф-ции FTDI_D2XX::Log_File_Open    =================================================================
+
+// ============================================   Блок ответов ф-ции FTDI_D2XX::Data_File_Open    =================================================================
+    case 0x0015: str.sprintf("0x%X: Data_File_Open()->tstfile.open()->File does not exist !!!\n", value); Write_To_Log(value, str);  break;
+
+    case 0x0016:  str.sprintf("File %s  is opened for reading TEST data!!!\n", Test_Data_File);  Write_To_Log(value, str);  break;
+
+
+
 
 //=============================================  Блок ответов ф-ции Command_File_Execute  =================
 

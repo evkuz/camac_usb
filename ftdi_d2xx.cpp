@@ -281,7 +281,8 @@ void FTDI_D2XX::Read_A(uint numBytes)
  // Работаем без оборудования
  //   ftStatus = FT_Read(ftHandle_A, byInputBuffer,numBytes,&dwNumBytesRead);
   ftStatus = FT_OK;
-  memcpy(byInputBuffer, TEST_DATA_B0, 8);
+  File_read_Current(byInputBuffer);
+  //memcpy(byInputBuffer, TEST_DATA_B0, 8);
 
 if (ftStatus != FT_OK)
 {
