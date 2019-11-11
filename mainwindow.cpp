@@ -2097,6 +2097,9 @@ void MainWindow::on_Show_Selected_Spectral_Single_pushButton_clicked()
     byOutputBuffer[3] = 0x22;
    */
 
+    // Очищаем экран, начинаем заново отрисовку
+    emit on_pushButton_Clear_Hyst_clicked();
+
 }
 
 //+++++++++++++++++++++++++++++++=
@@ -2161,11 +2164,11 @@ void MainWindow::on_N_Spectral_spinBox_Single_valueChanged(int arg1)
 
  //   str.sprintf("Передаваемый аргумент имеет значение : %d \n", arg1); Write_To_Log(0x7777, str);
 
-    Hyst_Single->replot();
+  //  Hyst_Single->replot();
 
     // Ага, а буфер остался со старыми точками ???!!!
     // Вот тут нам поможет
-    emit on_pushButton_Clear_Hyst_clicked();
+  //  emit on_pushButton_Clear_Hyst_clicked();
 }
 
 
