@@ -258,7 +258,7 @@ void FTDI_D2XX::Read_AAA(void)
    // Работаем без оборудования
    // ftStatus = FT_GetQueueStatus(ftHandle_A,&RxBytes); //RxBytes_2
    ftStatus = FT_OK;
-   RxBytes = 8;
+   RxBytes = test_bytes_to_read;
    if (RxBytes > 0)
     {
    //    str.sprintf("Read_AAA()->FT_GetQueueStatus()->Got %d bytes instead of 8 bytes\n", RxBytes );
@@ -281,7 +281,8 @@ void FTDI_D2XX::Read_A(uint numBytes)
  // Работаем без оборудования
  //   ftStatus = FT_Read(ftHandle_A, byInputBuffer,numBytes,&dwNumBytesRead);
   ftStatus = FT_OK;
-  File_read_Current(byInputBuffer);
+  File_read_All(byInputBuffer);
+ // File_read_Current(byInputBuffer);
   //memcpy(byInputBuffer, TEST_DATA_B0, 8);
 
 if (ftStatus != FT_OK)
@@ -290,7 +291,7 @@ if (ftStatus != FT_OK)
     return ;
 }
 
-if (numBytes != dwNumBytesRead) {str.sprintf("Было доступно %du байт, а считано %lu байт\n",numBytes, dwNumBytesRead);}
+if (numBytes != dwNumBytesRead) {str.sprintf("Было доступно %d байт, а считано %lu байт\n",numBytes, dwNumBytesRead);  KK_Write_To_Log(0xeeee, str);}
 
 
 //Считали, [ сразу очищаем ] Значит буфер очищен

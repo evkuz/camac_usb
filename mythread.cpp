@@ -33,7 +33,7 @@ void MyThread::A_SLOT() // ОБработчик для thread_A прием да�
 
     while ((!this->finthread) ) // !!!event-loop!!! && !this->once
     {
-        QThread::usleep(10);
+        QThread::usleep(50000);
  /*       boost::chrono::steady_clock::time_point start= boost::chrono::steady_clock::now();
         boost::chrono::steady_clock::duration delay= boost::chrono::microseconds(300);
         while (boost::chrono::steady_clock::now() - start <= delay) {;}

@@ -1,6 +1,8 @@
 #include "ftdi_d2xx.h"
 #include <QFile>
 
+//#define test_bytes_to_read 1840
+
 int FTDI_D2XX::Data_File_Open(QString fname)
 {
     int ftdi_error_code = 0;
@@ -19,7 +21,6 @@ return ftdi_error_code; // 0 means it's OK !
 void FTDI_D2XX::File_read_Current(char *buf_data)
 {
 
-    uchar num;
 
     if (!tstfile.atEnd())
     {
@@ -44,4 +45,16 @@ void FTDI_D2XX::File_read_Current(char *buf_data)
     }
 
 
+}
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++
+void FTDI_D2XX::File_read_All(char *buf_data)
+{
+
+//   quint64 numbytes;
+
+   tstfile.seek(0);// иначе считаем файл только 1 раз.
+
+   tstfile.read(buf_data, test_bytes_to_read);
+ //  str.sprintf("Fetched  %d bytes \n", numbytes); KK_Write_To_Log(0x1234, str);
+  // buf_data = reinterpret_cast<char>(tbuf);
 }
